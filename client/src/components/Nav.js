@@ -1,5 +1,5 @@
 import React from "react"
-import {Link, NavLink} from "react-router-dom"
+import { NavLink} from "react-router-dom"
 import styled from "styled-components"
 
 const NavWrapper = styled.div`
@@ -24,7 +24,8 @@ h1 {
     font-size: 36;
 }
 `
-
+// I think we should make our nav bar with dropdowns so that Search can include Recipe and Nutrition, Profile could include Login, Register, Saved Recipes and Shopping list and Reviews
+// ex. Sunday Staples                   Home | Search | Profile | Reviews
 const Nav = () => {
     return(
         <>
@@ -32,9 +33,9 @@ const Nav = () => {
                 <h1>Sunday Staples</h1>
                 <NavLink
                 className="nav-link"
-                to="/"
+                to="/home"
                 activeClassName="active"
-                isActive = {()=> window.location.pathname === "/" || window.location.pathname === "Home"}>
+                isActive = {()=> window.location.pathname === "/home" || window.location.pathname === "home"}>
                     Home
                 </NavLink>
 
@@ -42,7 +43,7 @@ const Nav = () => {
                 
                 <NavLink
                 className="nav-link"
-                to="/RecipeSearch"
+                to="/recipe-search"
                 activeClassName="active">
                     Recipe Search
                 </NavLink>
@@ -51,7 +52,7 @@ const Nav = () => {
 
                 <NavLink
                 className="nav-link"
-                to="/NutritionSearch"
+                to="/nutrition-search"
                 activeClassName="active">
                     Nutrition Search
                 </NavLink>
@@ -60,7 +61,7 @@ const Nav = () => {
 
                 <NavLink
                 className="nav-link"
-                to="/SavedRecipes"
+                to="/saved-recipes"
                 activeClassName="active">
                     Saved Recipes
                 </NavLink>
@@ -69,7 +70,7 @@ const Nav = () => {
 
                 <NavLink
                 className="nav-link"
-                to="/ShoppingList"
+                to="/shopping-list"
                 activeClassName="active">
                     Shopping List
                 </NavLink>
@@ -78,7 +79,7 @@ const Nav = () => {
 
                 <NavLink
                 className="nav-link"
-                to="/Reviews"
+                to="/reviews"
                 activeClassName="active">
                     Reviews
                 </NavLink>
