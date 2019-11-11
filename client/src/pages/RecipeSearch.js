@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components"
 import API from "../utils/API"
+import RecipeCard from "../components/informationCards/RecipeCard"
 
 const RecSearch = styled.div`
 h1{
@@ -28,14 +29,20 @@ h1{
 .searchButton{
     border-radius: 5px;
 }
+.searchedRecipes{
+    width: 80vw;
+    margin-left: 10vw;
+    margin-top: 10px;
+}
 `
 
 class RecipeSearch extends Component {
     state = {
-        staple: ""
+        staple: "",
+        recipes: []
     }
 
-    
+
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -46,13 +53,10 @@ class RecipeSearch extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        if(this.state.staple){
-            API.getRecipes({
-                staple: this.state.staple
-            })
-
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+        if (this.state.staple) {
+            API.getRecipes(this.state.staple)
+                .then(res => this.setState({ recipes: res.data.hits }))
+                .catch(err => console.log(err))
         }
     }
 
@@ -87,6 +91,23 @@ class RecipeSearch extends Component {
                         >
                             Search
                         </button>
+                    </div>
+
+                    <div className="searchedRecipes">
+                        <h1>Recipes</h1>
+                        <ul>
+                            {this.state.recipes.map(recipe => (
+                                <RecipeCard 
+                                key={recipe.recipe.url}
+                                name={recipe.recipe.label}
+                                link={recipe.recipe.url}
+                                image={recipe.recipe.image}
+                                time={recipe.recipe.totalTime}
+                                servings={recipe.recipe.yield}
+                                ingredients={recipe.recipe.ingredientLines}
+                                />
+                            ))}
+                        </ul>
                     </div>
                 </RecSearch>
             </>
