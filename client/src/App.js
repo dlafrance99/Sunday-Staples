@@ -45,7 +45,7 @@ function App () {
            <div>
                <Nav />
                <Switch>
-                    <Route exact path="/" component={Landing} />
+                    <Route exact path="/" component={Home} />
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/recipe-search" component={RecipeSearch} />
