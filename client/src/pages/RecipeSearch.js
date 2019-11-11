@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components"
+import API from "../utils/API"
 
 const RecSearch = styled.div`
 h1{
@@ -29,30 +30,68 @@ h1{
 }
 `
 
-const RecipeSearch = () => {
-    return (
-        <>
-            <RecSearch>
-                <div className="search-instructions">
-                    <h1>
-                        Recipe Search
-                   </h1>
-                    <p>
-                        Add some variety to your meal plan for the week by searching a Sunday Staple (protein, veggie, fruit, anything that you have leftover from the past week) and find a new recipe to try out. You can save the recipe title and link by clicking the "Save!" button, and then you can come back and view saved recipes by clicking on "VIEW SAVED". It's that easy!
-                   </p>
-                    <p>
-                        To make it even easier on you, if you like a recipe and want to try it out you can click "ADD TO SHOPPING LIST" and it will transfer the ingredients to your Shopping List page.
-                   </p>
-                </div>
+class RecipeSearch extends Component {
+    state = {
+        staple: ""
+    }
 
-                <div className="searchDiv">
-                    Search Staple:
-                    <input type="text" className="searchInput"></input>
-                    <button type="search" className="searchButton">Search</button>
-                </div>
-            </RecSearch>
-        </>
-    )
+    
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        if(this.state.staple){
+            API.getRecipes({
+                staple: this.state.staple
+            })
+
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        }
+    }
+
+    render() {
+
+        return (
+            <>
+                <RecSearch>
+                    <div className="search-instructions">
+                        <h1>
+                            Recipe Search
+                   </h1>
+                        <p>
+                            Add some variety to your meal plan for the week by searching a Sunday Staple (protein, veggie, fruit, anything that you have leftover from the past week) and find a new recipe to try out. You can save the recipe title and link by clicking the "Save!" button, and then you can come back and view saved recipes by clicking on "VIEW SAVED". It's that easy!
+                   </p>
+                        <p>
+                            To make it even easier on you, if you like a recipe and want to try it out you can click "ADD TO SHOPPING LIST" and it will transfer the ingredients to your Shopping List page.
+                   </p>
+                    </div>
+
+                    <div className="searchDiv">
+                        Search Staple:
+                    <input
+                            value={this.state.staple}
+                            onChange={this.handleInputChange}
+                            name="staple"
+                            placeholder="Enter Staple"
+                        />
+                        <button
+                            onClick={this.handleFormSubmit}
+                            className="searchButton"
+                        >
+                            Search
+                        </button>
+                    </div>
+                </RecSearch>
+            </>
+        )
+    }
 }
 
 export default RecipeSearch;
