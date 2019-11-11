@@ -1,5 +1,6 @@
-import React from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
+import Landing from "../components/Landing";
 
 const Homestyle = styled.div`
 margin: auto;
@@ -53,6 +54,7 @@ hr {
 const Home = () => {
     return (
         <>
+        <Landing />
             <Homestyle>
                 <div className="Home-image">
 
