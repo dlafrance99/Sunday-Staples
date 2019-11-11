@@ -1,6 +1,8 @@
-import React from "react"
+import React, { Component } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import API from "../utils/API"
+import NutritionCard from "../components/informationCards/NutritionCard"
 
 const NutSearch = styled.div`
 h1{
@@ -43,41 +45,96 @@ h1{
 
 `
 
-const NutritionSearch = () => {
-    return (
-        <>
-            <NutSearch>
-                <div className="search-instructions">
-                    <h1>
-                        Nutrition Search
+class NutritionSearch extends Component {
+    state = {
+        ingredient: "",
+        quantity: "",
+        nutrition: []
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        if (this.state.ingredient) {
+            API.getNutrition(this.state.ingredient)
+                .then(res => this.setState({nutrition: res.data.hints}))
+                .catch(err => console.log(err))
+        }
+    }
+
+
+    render() {
+
+        return (
+            <>
+                <NutSearch>
+                    <div className="search-instructions">
+                        <h1>
+                            Nutrition Search
                        </h1>
-                    <p>
-                        Search any ingredient or food to get the basic nutrition values. The quantity search is based on grams--don't worry if you can't calculate grams in your head, a good rule of thumb is between 100 to 200 grams for a serving size of most food. Here is a detailed resource for calculating to grams per serving if you want to stay accurate: <a href="https://healthyeating.sfgate.com/convert-food-serving-sizes-grams-8494.html" target="_blank">Calculate Grams Per Serving</a>
-                    </p>
-                </div>
+                        <p>
+                            Search any ingredient or food to get the basic nutrition values. The quantity search is based on grams--don't worry if you can't calculate grams in your head, a good rule of thumb is between 100 to 200 grams for a serving size of most food. Here is a detailed resource for calculating to grams per serving if you want to stay accurate: <a href="https://healthyeating.sfgate.com/convert-food-serving-sizes-grams-8494.html" target="_blank">Calculate Grams Per Serving</a>
+                        </p>
+                    </div>
 
-                <div className="searchDiv">
-                    Search Ingredient:
-                        <input type="text" className="searchInput" placeholder="e.g spinach"></input>
-                        <input type="text" className="searchInput" placeholder ="qty must be in grams"></input>
-                    <button type="search" className="searchButton">Search</button>
-                </div>
+                    <div className="searchDiv">
+                        Search Ingredient:
+                        <input
+                            value={this.state.ingredient}
+                            onChange={this.handleInputChange}
+                            name="ingredient"
+                            placeholder="e.g spinach"
+                        />
 
-                <div className="NutritionalTable">
-                    <table className="nut-table">
-                        <tr>
-                            <th className="tablehead">Quantity</th>
-                            <th className="tablehead">Units</th>
-                            <th className="tablehead">Food</th>
-                            <th className="tablehead">Energy</th>
-                            <th className="tablehead">Nutrients</th>
-                        </tr>
-                        
-                    </table>
-                </div>
-            </NutSearch>
-        </>
-    )
+                        <input 
+                        value={this.state.quantity}
+                        onChange={this.handleInputChange}
+                        name="quantity"
+                        className="searchInput" 
+                        placeholder="qty must be in grams"
+                        />
+
+                        <button
+                            onClick={this.handleFormSubmit}
+                            className="searchButton"
+                        >
+                            Search
+                         </button>
+                    </div>
+
+                    <div className="NutritionalTable">
+                        <table className="nut-table">
+                            <tr>
+                                <th className="tablehead">Quantity</th>
+                                <th className="tablehead">Units</th>
+                                <th className="tablehead">Food</th>
+                                <th className="tablehead">Energy</th>
+                                <th className="tablehead">Nutrients</th>
+                            </tr>
+                            {this.state.nutrition.slice(0,5).map(info => (
+                                <NutritionCard
+                                food = {info.food.label}
+                                quantity={this.state.quantity}
+                                energy={info.food.nutrients.ENERC_KCAL}
+                                fat = {info.food.nutrients.FAT}
+                                fiber= {info.food.nutrients.FIBTG}
+                                protein = {info.food.nutrients.PROCNT}
+                                carb = {info.food.nutrients.CHOCDF}
+                                />
+                            ))}
+
+                        </table>
+                    </div>
+                </NutSearch>
+            </>
+        )
+    }
 }
 
 export default NutritionSearch;
