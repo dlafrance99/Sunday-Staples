@@ -10,6 +10,4 @@ const featuredRecipeSchema = new Schema({
     ingredients: {type: Array}
 });
 
-const FeaturedRecipes = mongoose.model("FeaturedRecipes", featuredRecipeSchema);
-
-module.exports = FeaturedRecipes;
+module.exports = featuredRecipes = mongoose.model("FeaturedRecipes", featuredRecipeSchema);

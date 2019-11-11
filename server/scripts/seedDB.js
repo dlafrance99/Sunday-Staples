@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const db = require('../models/Recipes.js');
-const DevURI = require('../config/keys').mongoURI
+const db = require('../models');
+const DevURI = require('../config/keys').mongoURI;
 
 mongoose.connect(
     process.env.MONGODB_URI ||
