@@ -28,24 +28,28 @@ img{
 `
 
 const RecipeCard = (props) => {
+
+    
     return (
         <>
             <RecipeCardstyle>
                 <li className="cardlist">
                     <h3>{props.name}</h3>
-                    <a href={props.link} target="_blank">Link to Recipe</a>
+                    <a href={props.link} rel="noopener noreferrer" target="_blank">Link to Recipe</a>
                     <h4>Time: {props.time} Servings: {props.servings}</h4>
                     <img src={props.image} alt="recipe"></img>
                     <h4>Ingredients: </h4>
                     <ul>
                         {props.ingredients.map(ingredient => (
                             <li
-                            
+
                             >{ingredient}</li>
                         ))}
                     </ul>
 
-                    <button className="saveRecButt">
+                    <button
+                        onClick={props.handlesave}
+                        className="saveRecButt">
                         Save Recipe!
                     </button>
                 </li>

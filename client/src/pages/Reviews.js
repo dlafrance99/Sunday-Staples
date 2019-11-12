@@ -30,7 +30,7 @@ const Reviews = () => {
                     <div className="review-content">
                         <h4>Name Here</h4>
                         <h2 >Recipe Name here</h2>
-                        <a>Recipe link here</a>
+                        <a href="/home">Recipe link here</a>
                         <p>Review here</p>
                         <p>Star count here</p>
                     </div>
