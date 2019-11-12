@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default {
     getRecipes: function(staple){
-        return axios.get(`https://api.edamam.com/search?q=${staple}&app_id=66592fe3&app_key=19823d841e3e1f603bdc16d31a5dce43&from=0&to=1`)
+        return axios.get(`https://api.edamam.com/search?q=${staple}&app_id=66592fe3&app_key=19823d841e3e1f603bdc16d31a5dce43&from=0&to=2`)
     },
 
     getNutrition: function(nutrient){
@@ -11,5 +11,9 @@ export default {
 
     saveRecipe: function(recipe){
         return axios.post("/api/savedRecipes", recipe)
+    },
+
+    loadSaved: function() {
+        return axios.get("/api/savedRecipes")
     }
 }
