@@ -14,6 +14,10 @@ h1{
     margin-top: 10px;
     padding: 10px;
 }
+.stapleInput {
+    margin-left: 5px;
+    margin-right: 5px;
+}
 .searchDiv{
     background-color: #F8F8F8;
     width: 80vw;
@@ -42,8 +46,6 @@ class RecipeSearch extends Component {
         recipes: []
     }
 
-
-
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
@@ -55,9 +57,22 @@ class RecipeSearch extends Component {
         event.preventDefault();
         if (this.state.staple) {
             API.getRecipes(this.state.staple)
-                .then(res => this.setState({ recipes: res.data.hits }))
+                .then(res =>
+                    this.setState({ recipes: res.data.hits }),
+                    this.shuffleArray(this.state.recipes)
+                )
                 .catch(err => console.log(err))
         }
+    }
+
+    shuffleArray = (array) => {
+        for (let i = (array.length) - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            const x = array[i];
+            array[i] = array[j]
+            array[j] = x
+        }
+        this.setState({ recipes: array })
     }
 
     render() {
@@ -82,6 +97,7 @@ class RecipeSearch extends Component {
                     <input
                             value={this.state.staple}
                             onChange={this.handleInputChange}
+                            className="stapleInput"
                             name="staple"
                             placeholder="Enter Staple"
                         />
@@ -96,15 +112,15 @@ class RecipeSearch extends Component {
                     <div className="searchedRecipes">
                         <h1>Recipes</h1>
                         <ul>
-                            {this.state.recipes.map(recipe => (
-                                <RecipeCard 
-                                key={recipe.recipe.url}
-                                name={recipe.recipe.label}
-                                link={recipe.recipe.url}
-                                image={recipe.recipe.image}
-                                time={recipe.recipe.totalTime}
-                                servings={recipe.recipe.yield}
-                                ingredients={recipe.recipe.ingredientLines}
+                            {this.state.recipes.slice(0, 6).map(recipe => (
+                                <RecipeCard
+                                    key={recipe.recipe.url}
+                                    name={recipe.recipe.label}
+                                    link={recipe.recipe.url}
+                                    image={recipe.recipe.image}
+                                    time={recipe.recipe.totalTime}
+                                    servings={recipe.recipe.yield}
+                                    ingredients={recipe.recipe.ingredientLines}
                                 />
                             ))}
                         </ul>
