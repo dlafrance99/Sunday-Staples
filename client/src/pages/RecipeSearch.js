@@ -57,9 +57,7 @@ class RecipeSearch extends Component {
         event.preventDefault();
         if (this.state.staple) {
             API.getRecipes(this.state.staple)
-                .then(res =>
-                    this.shuffleArray(res.data.hits)
-                )
+                .then(res => this.shuffleArray(res.data.hits))
                 .catch(err => console.log(err))
         }
     }
@@ -72,6 +70,13 @@ class RecipeSearch extends Component {
             array[j] = x
         }
         this.setState({ recipes: array })
+    }
+
+    handlesave = recipe => {
+        console.log(recipe)
+        API.saveRecipe(recipe)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -120,6 +125,14 @@ class RecipeSearch extends Component {
                                     time={recipe.recipe.totalTime}
                                     servings={recipe.recipe.yield}
                                     ingredients={recipe.recipe.ingredientLines}
+                                    handlesave={() => this.handlesave({
+                                        name: recipe.recipe.label,
+                                        link: recipe.recipe.url,
+                                        time: recipe.recipe.totalTime,
+                                        servings: recipe.recipe.yield,
+                                        image: recipe.recipe.image,
+                                        ingredients: recipe.recipe.ingredientLines
+                                    })}
                                 />
                             ))}
                         </ul>

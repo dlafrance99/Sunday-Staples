@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-import { Link } from "react-router-dom"
 import API from "../utils/API"
 import NutritionCard from "../components/informationCards/NutritionCard"
 
@@ -79,7 +78,7 @@ class NutritionSearch extends Component {
                             Nutrition Search
                        </h1>
                         <p>
-                            Search any ingredient or food to get the basic nutrition values. The quantity search is based on grams--don't worry if you can't calculate grams in your head, a good rule of thumb is between 100 to 200 grams for a serving size of most food. Here is a detailed resource for calculating to grams per serving if you want to stay accurate: <a href="https://healthyeating.sfgate.com/convert-food-serving-sizes-grams-8494.html" target="_blank">Calculate Grams Per Serving</a>
+                            Search any ingredient or food to get the basic nutrition values. The quantity search is based on grams--don't worry if you can't calculate grams in your head, a good rule of thumb is between 100 to 200 grams for a serving size of most food. Here is a detailed resource for calculating to grams per serving if you want to stay accurate: <a href="https://healthyeating.sfgate.com/convert-food-serving-sizes-grams-8494.html" rel="noopener noreferrer" target="_blank">Calculate Grams Per Serving</a>
                         </p>
                     </div>
 

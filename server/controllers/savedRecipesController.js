@@ -10,10 +10,10 @@ module.exports = {
     createSavedRecipe: function(req,res) {
         db.SavedRecipes
         .create({
-            title: req.body.title,
-            url: req.body.url,
+            title: req.body.name,
+            url: req.body.link,
             image: req.body.image,
-            totalTime: req.body.totalTime,
+            totalTime: req.body.time,
             servings: req.body.servings,
             ingredients:req.body.ingredients
         })
