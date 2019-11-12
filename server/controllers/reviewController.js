@@ -17,7 +17,7 @@ module.exports = {
     },
     updateReview: function(req,res) {
       db.Reviews
-        .findOneAndUpdate({ _id: req.body.id }, req.body)
+        .findOneAndUpdate({ _id: req.params.id }, req.body)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     }

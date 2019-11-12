@@ -6,7 +6,6 @@ router.route("/")
   .post(reviewController.createReview);
 
 router.route("/:id")
-  .get(reviewController.updateReview)
-
+  .put(reviewController.updateReview)
 
 module.exports = router;
