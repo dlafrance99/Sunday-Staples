@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const users = require("./routes/api/users");
+const routes = require("./routes");
 
 const app = express();
 // Bodyparser middleware
@@ -29,7 +29,7 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 // Routes
-app.use("/api/users", users);
+app.use(routes);
 
 const port = process.env.PORT || 3001; // process.env.port is Heroku's port if you choose to deploy the app there
 
