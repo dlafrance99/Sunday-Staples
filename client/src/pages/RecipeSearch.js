@@ -58,8 +58,7 @@ class RecipeSearch extends Component {
         if (this.state.staple) {
             API.getRecipes(this.state.staple)
                 .then(res =>
-                    this.setState({ recipes: res.data.hits }),
-                    this.shuffleArray(this.state.recipes)
+                    this.shuffleArray(res.data.hits)
                 )
                 .catch(err => console.log(err))
         }
