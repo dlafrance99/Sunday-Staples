@@ -6,7 +6,11 @@ const shoppingListSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-      }
+    },
+    complete: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = shoppingList = mongoose.model("ShoppingList", shoppingListSchema);
