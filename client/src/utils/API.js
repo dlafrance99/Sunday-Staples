@@ -38,5 +38,9 @@ export default {
 
     getPrevious: function (user) {
         return axios.get(`/api/shoppingList/previous/${user}`)
+    },
+    //Reviews
+    saveReview: function(review) {
+        return axios.post(`/api/reviews` , review)
     }
 }
