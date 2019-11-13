@@ -27,8 +27,8 @@ export default {
     },
 
     addIngredients: function(info) {
-        console.log(info.user, info.ingredients)
-        return axios.put(`api/shoppingList/${info.user}`,info.ingredients)
+        console.log(info.id, info.user, info.ingredients)
+        return axios.put(`api/shoppingList/update/${info.id}`, info.ingredients)
     },
 
     getCurrent: function (user) {

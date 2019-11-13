@@ -20,8 +20,8 @@ class SavedRecipes extends Component {
     
     state = {
         savedRecipes: [],
-        currentList: [],
-        user: this.props.auth.user.id
+        currentList: {},
+        user: this.props.auth.user.id,
        }
 
 
@@ -38,7 +38,7 @@ class SavedRecipes extends Component {
 
     getCurrent = (user) => {
         API.getCurrent(user)
-            .then(res => console.log(res.data))
+            .then(res => this.setState({ currentList: res.data}))
             .catch(err => console.log(err))
     }
 
@@ -54,8 +54,8 @@ class SavedRecipes extends Component {
     }
 
     handleAdd = info => {
-        console.log(this.state.currentList)
-        if (this.state.currentList === []){
+    
+        if (this.state.currentList.length === 0){
             API.createShoppingList(info)
               .then(res => this.setState({ currentList: res.data }))
               .catch(err => console.log(err))
@@ -92,7 +92,8 @@ class SavedRecipes extends Component {
                                     })}
                                     handleAdd={() => this.handleAdd({
                                         user: this.props.auth.user.id,
-                                        ingredients: recipe.ingredients
+                                        ingredients: recipe.ingredients,
+                                        id: this.state.currentList.length === 1 ? this.state.currentList[0]._id : null
                                     })}
                                 />
                             ))}
