@@ -39,22 +39,23 @@ hr{
 class ShoppingList extends Component {
     state = {
         currentList: [],
-        previousLists: []    
+        previousLists: [],
+        user: this.props.auth.user.id  
     }
 
     componentDidMount() {
-        this.getCurrent();
-        this.getPrevious();
+        this.getCurrent(this.state.user);
+        this.getPrevious(this.state.user);
     }
 
-    getCurrent = () => {
-        API.findCurrentList(this.props.auth.user.id)
+    getCurrent = (user) => {
+        API.findCurrentList(user)
             .then(res => this.setState({ currentList: res.data }))
             .catch(err => console.log(err))
     }
 
-    getPrevious = () => {
-        API.findCurrentList(this.props.auth.user.id)
+    getPrevious = (user) => {
+        API.findCurrentList(user)
             .then(res => this.setState({ previousLists: res.data }))
             .catch(err => console.log(err))
     }

@@ -21,6 +21,7 @@ class SavedRecipes extends Component {
 
     state = {
         savedRecipes: [],
+        currentList: {},
         user: this.props.auth.user.id,
         showModal: false,
         reviewId: {},
@@ -36,12 +37,19 @@ class SavedRecipes extends Component {
     };
 
     componentDidMount() {
-        this.getSaved(this.state.user);
+        this.getSaved(this.state.user)
+        this.getCurrent(this.state.user);
     }
 
     getSaved = (user) => {
         API.loadSaved(user)
             .then(res => this.setState({ savedRecipes: res.data }))
+            .catch(err => console.log(err))
+    }
+
+    getCurrent = (user) => {
+        API.getCurrent(user)
+            .then(res => this.setState({ currentList: res.data}))
             .catch(err => console.log(err))
     }
 
@@ -59,6 +67,19 @@ class SavedRecipes extends Component {
 
     showModal = () => {
         this.setState({ showModal: true })
+    }
+
+    handleAdd = info => {
+    
+        if (this.state.currentList.length === 0){
+            API.createShoppingList(info)
+              .then(res => this.setState({ currentList: res.data }))
+              .catch(err => console.log(err))
+        } else {
+            API.addIngredients(info)
+            .then(res => this.setState({ currentList: res.data }))
+            .catch(err => console.log(err))
+        }
     }
 
     closeModal = () => {
@@ -98,6 +119,11 @@ class SavedRecipes extends Component {
                                         id: recipe._id,
                                         name: recipe.title,
                                         url: recipe.url
+                                    })}
+                                    handleAdd={() => this.handleAdd({
+                                        user: this.props.auth.user.id,
+                                        ingredients: recipe.ingredients,
+                                        id: this.state.currentList.length === 1 ? this.state.currentList[0]._id : null
                                     })}
                                 />
                             ))}
