@@ -18,6 +18,7 @@ import SavedRecipes from "./pages/SavedRecipes";
 import ShoppingList from "./pages/ShoppingList";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth

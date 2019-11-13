@@ -15,5 +15,9 @@ export default {
 
     loadSaved: function() {
         return axios.get("/api/savedRecipes")
+    },
+
+    deleteSaved: function(id) {
+        return axios.delete("/api/savedRecipes/" + id)
     }
 }
