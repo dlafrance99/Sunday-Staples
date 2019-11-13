@@ -2,20 +2,18 @@ const router = require("express").Router();
 const shoppingListController = require("../../controllers/shoppingListController");
 
 router.route("/")
-  .get(shoppingListController.findCurrentList)
   .post(shoppingListController.createShoppingList)
   .put(shoppingListController.addIngredients)
 
-router.route("/complete")
+router.route("/:id")
+  .get(shoppingListController.findCurrentList)
+  .delete(shoppingListController.deleteList)
   .put(shoppingListController.completeList)
 
-router.route("/:id")
-  .delete(shoppingListController.deleteList)
-
-router.route("/previous")
+router.route("/previous/:id")
   .get(shoppingListController.findThreeMostRecent)
 
-router.route("previous/:date")
+router.route("previous/:id/:date")
   .get(shoppingListController.findListByDate)
 
 module.exports = router;
