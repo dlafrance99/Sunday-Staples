@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components"
+import { NavLink } from "react-router-dom"
 
 const RecipeCardstyle = styled.div`
 width: 40%;
@@ -25,11 +26,41 @@ img{
     border-radius: 5px;
     padding: 3px;
 }
+.revButt{
+    background-color: transparent;
+    margin-top: 22px;
+    margin-left: 5%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
 `
 
 const RecipeCard = (props) => {
 
-    
+    const button = () => {
+        if (props.database) {
+            return "Delete!"
+        } else if (props.saved) {
+            return "Saved!"
+        } else {
+            return "Save!"
+        }
+    }
+
+    const reviewbutton = () => {
+        if (props.database) {
+            return (
+                <button
+                    onClick={props.handleReview}
+                    className="revButt"
+                >
+                    Review
+                </button>
+            )
+        }
+    }
+
     return (
         <>
             <RecipeCardstyle>
@@ -48,10 +79,12 @@ const RecipeCard = (props) => {
                     </ul>
 
                     <button
-                        onClick={props.handlesave}
+                        onClick={props.saved ? props.handleDelete : props.handlesave}
                         className="saveRecButt">
-                        Save Recipe!
+                        {button(props)}
                     </button>
+
+                    {reviewbutton()}
                 </li>
             </RecipeCardstyle>
         </>

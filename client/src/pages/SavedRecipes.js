@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 
-const savedStyle = styled.div`
+const SavedStyle = styled.div`
 .searchedRecipes{
     width: 80vw;
     margin-left: 10vw;
@@ -34,27 +34,46 @@ class SavedRecipes extends Component {
             .catch(err => console.log(err))
     }
 
+    handleDelete = id => {
+        console.log(id)
+        API.deleteSaved(id.id)
+            .then(res => this.getSaved())
+            .catch(err => console.log(err))
+    }
+
+    handleReview = id => {
+        alert("hit review")
+    }
+
     render() {
 //  console.log(this.props.auth.user.id)
         return (
             <>
-                <savedStyle>
+                <SavedStyle>
                     <div className="searchedRecipes">
                         <ul>
                             {this.state.savedRecipes.map(recipe => (
                                 <RecipeCard
                                     key={recipe.url}
+                                    database={true}
+                                    saved={true}
                                     name={recipe.title}
                                     link={recipe.url}
                                     image={recipe.image}
                                     time={recipe.totalTime}
                                     servings={recipe.servings}
                                     ingredients={recipe.ingredients}
+                                    handleDelete={() => this.handleDelete({
+                                        id: recipe._id
+                                    })}
+                                    handleReview={() => this.handleReview({
+                                        id: recipe._id
+                                    })}
                                 />
                             ))}
                         </ul>
                     </div>
-                </savedStyle>
+                </SavedStyle>
             </>
         )
     }

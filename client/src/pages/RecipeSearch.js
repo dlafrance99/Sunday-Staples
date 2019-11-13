@@ -73,15 +73,27 @@ class RecipeSearch extends Component {
             array[i] = array[j]
             array[j] = x
         }
-        this.setState({ recipes: array })
+        this.setState({ recipes: array.map(recipe => {
+            recipe.saved= false;
+            return recipe;
+        }) })
     }
 
     handlesave = recipe => {
-        console.log(recipe)
         API.saveRecipe(recipe)
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res.data.url)
+                const temparr = [...this.state.recipes];
+                const savedIndex = temparr.findIndex(recipe => recipe.recipe.url=== res.data.url)
+
+                temparr[savedIndex].saved = true;
+                console.log(temparr)
+                this.setState({recipes: temparr})
+            })
             .catch(err => console.log(err))
     }
+
+
 
     render() {
     // console.log(this.props.auth.user.id)
@@ -129,6 +141,7 @@ class RecipeSearch extends Component {
                                     time={recipe.recipe.totalTime}
                                     servings={recipe.recipe.yield}
                                     ingredients={recipe.recipe.ingredientLines}
+                                    saved={recipe.saved}
                                     handlesave={() => this.handlesave({
                                         name: recipe.recipe.label,
                                         link: recipe.recipe.url,
