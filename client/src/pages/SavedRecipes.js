@@ -122,6 +122,9 @@ class SavedRecipes extends Component {
                         </ul>
                     </div>
                 </SavedStyle>
+                <ReviewModal
+                    createReview={this.createReview}
+                />
             </>
         )
     }
