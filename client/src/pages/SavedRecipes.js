@@ -5,6 +5,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
+import ReviewModal from "../components/informationCards/ReviewModal"
 
 const SavedStyle = styled.div`
 .searchedRecipes{
@@ -17,12 +18,22 @@ const SavedStyle = styled.div`
 
 
 class SavedRecipes extends Component {
-    
+
     state = {
         savedRecipes: [],
-        user: this.props.auth.user.id
-       }
+        user: this.props.auth.user.id,
+        showModal: false,
+        reviewId: 0,
+        comment: "",
+        rating: 0
+    }
 
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
 
     componentDidMount() {
         this.getSaved(this.state.user);
@@ -41,18 +52,29 @@ class SavedRecipes extends Component {
             .catch(err => console.log(err))
     }
 
-    handleReview = id => {
-        alert("hit review")
+    handleReview = recipe => {
+        this.setState({ reviewId: recipe })
+        this.showModal()
     }
 
-    createReview = review => {
-        API.createReview(review)
-            .then(res => console.log(res.data))
+    showModal = () => {
+        this.setState({ showModal: true })
+    }
+
+    closeModal = () => {
+        this.setState({ showModal: false })
+    }
+
+    saveRev = review => {
+        console.log(review)
+        API.saveReview(review)
+            .then(res => console.log(res))
             .catch(err => console.log(err))
     }
 
+
     render() {
-//  console.log(this.props.auth.user.id)
+        //  console.log(this.props.auth.user.id)
         return (
             <>
                 <SavedStyle>
@@ -73,10 +95,30 @@ class SavedRecipes extends Component {
                                         id: recipe._id
                                     })}
                                     handleReview={() => this.handleReview({
-                                        id: recipe._id
+                                        id: recipe._id,
+                                        name: recipe.title,
+                                        url: recipe.url
                                     })}
                                 />
                             ))}
+
+                            <ReviewModal
+                                show={this.state.showModal}
+                                handleClose={() => this.closeModal()}
+                                id={this.state.reviewId}
+                                handleInputChange={this.handleInputChange}
+                                comment={this.state.comment}
+                                rating={this.state.rating}
+                                saveRev={() => this.saveRev({
+                                    name: this.state.reviewId.name,
+                                    link: this.state.reviewId.url,
+                                    id: this.state.reviewId.id,
+                                    comment: this.state.comment,
+                                    rating: this.state.rating
+                                })}
+                            >
+                            </ReviewModal>
+
                         </ul>
                     </div>
                 </SavedStyle>
@@ -91,11 +133,11 @@ class SavedRecipes extends Component {
 SavedRecipes.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
-  };
-  const mapStateToProps = state => ({
+};
+const mapStateToProps = state => ({
     auth: state.auth
-  });
-  export default connect(
+});
+export default connect(
     mapStateToProps,
     { logoutUser }
-  )(SavedRecipes);
+)(SavedRecipes);
