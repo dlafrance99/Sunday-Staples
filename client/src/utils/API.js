@@ -24,5 +24,9 @@ export default {
 
     saveReview: function(review) {
         return axios.post(`/api/reviews` , review)
+    },
+
+    loadReviews: function() {
+        return axios.get(`/api/reviews`)
     }
 }

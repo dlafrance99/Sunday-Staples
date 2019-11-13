@@ -72,7 +72,6 @@ const RecipeCard = (props) => {
                     <ul>
                         {props.ingredients.map(ingredient => (
                             <li
-
                             >{ingredient}</li>
                         ))}
                     </ul>
