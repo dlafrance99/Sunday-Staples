@@ -73,10 +73,12 @@ class RecipeSearch extends Component {
             array[i] = array[j]
             array[j] = x
         }
-        this.setState({ recipes: array.map(recipe => {
-            recipe.saved= false;
-            return recipe;
-        }) })
+        this.setState({
+            recipes: array.map(recipe => {
+                recipe.saved = false;
+                return recipe;
+            })
+        })
     }
 
     handlesave = recipe => {
@@ -84,11 +86,11 @@ class RecipeSearch extends Component {
             .then(res => {
                 console.log(res.data.url)
                 const temparr = [...this.state.recipes];
-                const savedIndex = temparr.findIndex(recipe => recipe.recipe.url=== res.data.url)
+                const savedIndex = temparr.findIndex(recipe => recipe.recipe.url === res.data.url)
 
                 temparr[savedIndex].saved = true;
                 console.log(temparr)
-                this.setState({recipes: temparr})
+                this.setState({ recipes: temparr })
             })
             .catch(err => console.log(err))
     }
@@ -96,7 +98,7 @@ class RecipeSearch extends Component {
 
 
     render() {
-    // console.log(this.props.auth.user.id)
+        // console.log(this.props.auth.user.id)
         return (
             <>
                 <RecSearch>
@@ -140,6 +142,7 @@ class RecipeSearch extends Component {
                                     image={recipe.recipe.image}
                                     time={recipe.recipe.totalTime}
                                     servings={recipe.recipe.yield}
+                                    uri={recipe.recipe.uri}
                                     ingredients={recipe.recipe.ingredientLines}
                                     saved={recipe.saved}
                                     handlesave={() => this.handlesave({
@@ -164,11 +167,11 @@ class RecipeSearch extends Component {
 RecipeSearch.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
-  };
-  const mapStateToProps = state => ({
+};
+const mapStateToProps = state => ({
     auth: state.auth
-  });
-  export default connect(
+});
+export default connect(
     mapStateToProps,
     { logoutUser }
-  )(RecipeSearch);
+)(RecipeSearch);
