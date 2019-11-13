@@ -17,21 +17,25 @@ const savedStyle = styled.div`
 
 
 class SavedRecipes extends Component {
+    
     state = {
-        savedRecipes: []    }
+        savedRecipes: [],
+        user: this.props.auth.user.id
+       }
+
 
     componentDidMount() {
-        this.getSaved();
+        this.getSaved(this.state.user);
     }
 
-    getSaved = () => {
-        API.loadSaved(this.props.auth.user.id)
+    getSaved = (user) => {
+        API.loadSaved(user)
             .then(res => this.setState({ savedRecipes: res.data }))
             .catch(err => console.log(err))
     }
 
     render() {
- console.log(this.props.auth.user.id)
+//  console.log(this.props.auth.user.id)
         return (
             <>
                 <savedStyle>

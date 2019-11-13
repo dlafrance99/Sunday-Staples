@@ -13,7 +13,8 @@ export default {
         return axios.post("/api/savedRecipes", recipe)
     },
 
-    loadSaved: function() {
-        return axios.get("/api/savedRecipes")
+    loadSaved: function(user) {
+        console.log(user)
+        return axios.get( `/api/savedRecipes/${user}`)
     }
 }

@@ -84,7 +84,7 @@ class RecipeSearch extends Component {
     }
 
     render() {
-    console.log(this.props.auth.user.id)
+    // console.log(this.props.auth.user.id)
         return (
             <>
                 <RecSearch>
@@ -135,7 +135,8 @@ class RecipeSearch extends Component {
                                         time: recipe.recipe.totalTime,
                                         servings: recipe.recipe.yield,
                                         image: recipe.recipe.image,
-                                        ingredients: recipe.recipe.ingredientLines
+                                        ingredients: recipe.recipe.ingredientLines,
+                                        user: this.props.auth.user.id
                                     })}
                                 />
                             ))}
