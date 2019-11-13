@@ -17,7 +17,8 @@ module.exports = {
           title: req.body.title,
           url: req.body.url,
           stars: req.body.stars,
-          comment: req.body.comment
+          comment: req.body.comment,
+          user: req.body.user
         })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))

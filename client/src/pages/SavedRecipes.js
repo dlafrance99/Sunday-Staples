@@ -45,6 +45,12 @@ class SavedRecipes extends Component {
         alert("hit review")
     }
 
+    createReview = review => {
+        API.createReview(review)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+    }
+
     render() {
 //  console.log(this.props.auth.user.id)
         return (
@@ -74,6 +80,9 @@ class SavedRecipes extends Component {
                         </ul>
                     </div>
                 </SavedStyle>
+                <ReviewModal
+                    createReview={this.createReview}
+                />
             </>
         )
     }
