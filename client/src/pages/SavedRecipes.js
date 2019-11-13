@@ -23,7 +23,7 @@ class SavedRecipes extends Component {
         savedRecipes: [],
         user: this.props.auth.user.id,
         showModal: false,
-        reviewId: 0,
+        reviewId: {},
         comment: "",
         rating: 0
     }
@@ -68,7 +68,7 @@ class SavedRecipes extends Component {
     saveRev = review => {
         console.log(review)
         API.saveReview(review)
-            .then(res => console.log(res))
+            .then(res => this.closeModal())
             .catch(err => console.log(err))
     }
 
@@ -105,16 +105,17 @@ class SavedRecipes extends Component {
                             <ReviewModal
                                 show={this.state.showModal}
                                 handleClose={() => this.closeModal()}
-                                id={this.state.reviewId}
+                                name={this.state.reviewId.name}
                                 handleInputChange={this.handleInputChange}
                                 comment={this.state.comment}
                                 rating={this.state.rating}
                                 saveRev={() => this.saveRev({
-                                    name: this.state.reviewId.name,
-                                    link: this.state.reviewId.url,
-                                    id: this.state.reviewId.id,
+                                    user: this.props.auth.user.id,
+                                    alias: this.props.auth.user.name,
+                                    title: this.state.reviewId.name,
+                                    url: this.state.reviewId.url,
                                     comment: this.state.comment,
-                                    rating: this.state.rating
+                                    stars: this.state.rating
                                 })}
                             >
                             </ReviewModal>

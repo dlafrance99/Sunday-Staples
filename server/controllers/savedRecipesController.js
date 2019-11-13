@@ -2,7 +2,6 @@ const db = require("../models");
 
 module.exports = {
     findAllSavedRecipes: function(req,res) {
-        console.log(req)
         db.SavedRecipes
           .find({ user: req.params.id })
           .then(dbModel => res.json(dbModel))
