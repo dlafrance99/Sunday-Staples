@@ -20,5 +20,9 @@ export default {
     loadSaved: function (user) {
         console.log(user)
         return axios.get(`/api/savedRecipes/${user}`)
+    },
+
+    saveReview: function(review) {
+        return axios.post(`/api/reviews` , review)
     }
 }
