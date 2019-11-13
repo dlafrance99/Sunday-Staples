@@ -50,7 +50,7 @@ const ModalStyle = styled.div`
 `
 
 
-const ReviewModal = ({ handleClose, show, children, id, saveRev, handleInputChange, comment, rating }) => {
+const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, comment, rating, name }) => {
 
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
@@ -69,7 +69,7 @@ const ReviewModal = ({ handleClose, show, children, id, saveRev, handleInputChan
                         >
                             X
                     </button>
-                        <h1>Review this {id.name}</h1>
+                        <h1>Review this {name}</h1>
                         <h2>Comment:</h2>
                         <input 
                             value={comment}
