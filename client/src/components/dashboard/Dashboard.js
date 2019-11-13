@@ -9,6 +9,7 @@ class Dashboard extends Component {
   };
 render() {
     const { user } = this.props.auth;
+    console.log (user)
 return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">
@@ -17,7 +18,8 @@ return (
               <b>Hey there,</b> {user.name.split(" ")[0]}
               <p className="flow-text grey-text text-darken-1">
                 You are logged into Sunday Staples{" "}
-                <span style={{ fontFamily: "monospace" }}></span> app 👏
+                <span style={{ fontFamily: "monospace" }}></span> 👏
+                
               </p>
             </h4>
             <button

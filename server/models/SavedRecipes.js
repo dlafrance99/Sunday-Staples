@@ -7,7 +7,8 @@ const savedRecipeSchema = new Schema({
     image: {type: String},
     totalTime: {type: Number},
     servings: {type: Number},
-    ingredients: {type: Array}
+    ingredients: {type: Array},
+    user: {type: String, required: true}
 });
 
 module.exports = savedRecipes = mongoose.model("SavedRecipes", savedRecipeSchema);

@@ -2,8 +2,9 @@ const db = require("../models");
 
 module.exports = {
     findAllSavedRecipes: function(req,res) {
+        console.log(req)
         db.SavedRecipes
-          .find(req.query)
+          .find({ user: req.params.id })
           .then(dbModel => res.json(dbModel))
           .catch(err => res.status(422).json(err))
     },
@@ -15,7 +16,8 @@ module.exports = {
             image: req.body.image,
             totalTime: req.body.time,
             servings: req.body.servings,
-            ingredients:req.body.ingredients
+            ingredients:req.body.ingredients,
+            user: req.body.user
         })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
