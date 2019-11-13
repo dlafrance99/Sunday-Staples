@@ -4,14 +4,21 @@ module.exports = {
     // Review routes
     findAllReviews: function(req, res) {
       db.Reviews
-        .find(req.query)
+        .find()
         .sort({date: -1})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     },
     createReview: function(req,res) {
       db.Reviews
-        .create(req.body)
+        .create({
+          user: req.body.user,
+          alias: req.body.alias,
+          title: req.body.title,
+          url: req.body.url,
+          stars: req.body.stars,
+          comment: req.body.comment
+        })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     },

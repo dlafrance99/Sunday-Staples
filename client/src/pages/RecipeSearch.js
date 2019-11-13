@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import styled from "styled-components"
 import API from "../utils/API"
 import RecipeCard from "../components/informationCards/RecipeCard"
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
+
 
 const RecSearch = styled.div`
 h1{
@@ -92,7 +96,7 @@ class RecipeSearch extends Component {
 
 
     render() {
-
+    // console.log(this.props.auth.user.id)
         return (
             <>
                 <RecSearch>
@@ -144,7 +148,8 @@ class RecipeSearch extends Component {
                                         time: recipe.recipe.totalTime,
                                         servings: recipe.recipe.yield,
                                         image: recipe.recipe.image,
-                                        ingredients: recipe.recipe.ingredientLines
+                                        ingredients: recipe.recipe.ingredientLines,
+                                        user: this.props.auth.user.id
                                     })}
                                 />
                             ))}
@@ -156,4 +161,14 @@ class RecipeSearch extends Component {
     }
 }
 
-export default RecipeSearch;
+RecipeSearch.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(RecipeSearch);

@@ -2,6 +2,9 @@ import React, { Component } from "react"
 import API from "../utils/API"
 import RecipeCard from "../components/informationCards/RecipeCard"
 import styled from "styled-components"
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
 
 const SavedStyle = styled.div`
 .searchedRecipes{
@@ -11,17 +14,22 @@ const SavedStyle = styled.div`
 }
 `
 
+
+
 class SavedRecipes extends Component {
+    
     state = {
-        savedRecipes: []
-    }
+        savedRecipes: [],
+        user: this.props.auth.user.id
+       }
+
 
     componentDidMount() {
-        this.getSaved();
+        this.getSaved(this.state.user);
     }
 
-    getSaved = () => {
-        API.loadSaved()
+    getSaved = (user) => {
+        API.loadSaved(user)
             .then(res => this.setState({ savedRecipes: res.data }))
             .catch(err => console.log(err))
     }
@@ -38,6 +46,7 @@ class SavedRecipes extends Component {
     }
 
     render() {
+//  console.log(this.props.auth.user.id)
         return (
             <>
                 <SavedStyle>
@@ -70,4 +79,14 @@ class SavedRecipes extends Component {
     }
 }
 
-export default SavedRecipes;
+SavedRecipes.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(SavedRecipes);

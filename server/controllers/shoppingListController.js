@@ -3,13 +3,13 @@ const db = require("../models");
 module.exports = {    
     findCurrentList: function(req,res) {
         db.ShoppingList
-        .find({ complete: false })
+        .find({ user: req.body.user, complete: false })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     },
     findThreeMostRecent: function(req,res) {
         db.ShoppingList
-        .find({ complete: true })
+        .find({ user: req.body.user, complete: true })
         .sort({date: -1}).limit(3)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
@@ -17,14 +17,17 @@ module.exports = {
     // What action will create and what will update? If most current list is complete then create a new one, else update the current list
     createShoppingList: function(req,res) {
         db.ShoppingList
-        .create({ ingredients: req.body.ingredients})
+        .create({ 
+            user: req.body.user,
+            ingredients: req.body.ingredients
+        })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     },
     addIngredients: function(req,res) {
         db.ShoppingList
         .update(
-            { complete: false },
+            { user: req.body.user, complete: false },
             {$push: {ingredients: req.body.ingredients}})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))   
@@ -32,7 +35,7 @@ module.exports = {
     completeList: function(req,res) {
         db.ShoppingList
         .update(
-            { complete: false },
+            { user: req.body.user, complete: false },
             { complete: true })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))  
@@ -46,7 +49,7 @@ module.exports = {
     },
     findListByDate: function(req,res) {
         db.ShoppingList
-        .find({ date: req.body })
+        .find({ user: req.body.user, date: req.body })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     }

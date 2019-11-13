@@ -1,5 +1,9 @@
-import React from "react"
-import styled from "styled-components"
+import React, { Component } from "react";
+import styled from "styled-components";
+import API from "../utils/API";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/authActions";
 
 const ShopList = styled.div`
 .myShoppingList{
@@ -31,7 +35,33 @@ hr{
 }
 `
 
-const ShoppingList = () => {
+
+class ShoppingList extends Component {
+    state = {
+        currentList: [],
+        previousLists: []    
+    }
+
+    componentDidMount() {
+        this.getCurrent();
+        this.getPrevious();
+    }
+
+    getCurrent = () => {
+        API.findCurrentList(this.props.auth.user.id)
+            .then(res => this.setState({ currentList: res.data }))
+            .catch(err => console.log(err))
+    }
+
+    getPrevious = () => {
+        API.findCurrentList(this.props.auth.user.id)
+            .then(res => this.setState({ previousLists: res.data }))
+            .catch(err => console.log(err))
+    }
+
+    render() {
+     console.log(this.props.auth.user.id)
+
     return (
         <>
         <ShopList>
@@ -53,5 +83,16 @@ const ShoppingList = () => {
         </>
     )
 }
+}
 
-export default ShoppingList;
+ShoppingList.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+  };
+  const mapStateToProps = state => ({
+    auth: state.auth
+  });
+  export default connect(
+    mapStateToProps,
+    { logoutUser }
+  )(ShoppingList);
