@@ -20,17 +20,25 @@ class SavedRecipes extends Component {
     
     state = {
         savedRecipes: [],
+        currentList: [],
         user: this.props.auth.user.id
        }
 
 
     componentDidMount() {
-        this.getSaved(this.state.user);
+        this.getSaved(this.state.user)
+        this.getCurrent(this.state.user);
     }
 
     getSaved = (user) => {
         API.loadSaved(user)
             .then(res => this.setState({ savedRecipes: res.data }))
+            .catch(err => console.log(err))
+    }
+
+    getCurrent = (user) => {
+        API.getCurrent(user)
+            .then(res => console.log(res.data))
             .catch(err => console.log(err))
     }
 
@@ -43,6 +51,19 @@ class SavedRecipes extends Component {
 
     handleReview = id => {
         alert("hit review")
+    }
+
+    handleAdd = info => {
+        console.log(this.state.currentList)
+        if (this.state.currentList === []){
+            API.createShoppingList(info)
+              .then(res => this.setState({ currentList: res.data }))
+              .catch(err => console.log(err))
+        } else {
+            API.addIngredients(info)
+            .then(res => this.setState({ currentList: res.data }))
+            .catch(err => console.log(err))
+        }
     }
 
     render() {
@@ -68,6 +89,10 @@ class SavedRecipes extends Component {
                                     })}
                                     handleReview={() => this.handleReview({
                                         id: recipe._id
+                                    })}
+                                    handleAdd={() => this.handleAdd({
+                                        user: this.props.auth.user.id,
+                                        ingredients: recipe.ingredients
                                     })}
                                 />
                             ))}
