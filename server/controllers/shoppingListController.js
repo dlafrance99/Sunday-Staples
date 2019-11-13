@@ -3,13 +3,13 @@ const db = require("../models");
 module.exports = {    
     findCurrentList: function(req,res) {
         db.ShoppingList
-        .find({ user: req.params.user, complete: false })
+        .find({ $and: [{user: req.params.id}, {complete: false}] })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     },
     findThreeMostRecent: function(req,res) {
         db.ShoppingList
-        .find({ user: req.params.user, complete: true })
+        .find({ $and: [{user: req.params.id}, {complete: true}] })
         .sort({date: -1}).limit(3)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
@@ -27,15 +27,15 @@ module.exports = {
     addIngredients: function(req,res) {
         db.ShoppingList
         .update(
-            { user: req.body.user, complete: false },
-            {$push: {ingredients: req.body.ingredients}})
+            { _id: req.params.id },
+            {$push: {ingredients: req.body}})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))   
     },
     completeList: function(req,res) {
         db.ShoppingList
         .update(
-            { user: req.params.user, complete: false },
+            { $and: [{user: req.body.user}, {complete: false}] },
             { complete: true })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))  
@@ -49,7 +49,7 @@ module.exports = {
     },
     findListByDate: function(req,res) {
         db.ShoppingList
-        .find({ user: req.body.user, date: req.body })
+        .find({  $and: [{user: req.body.user}, {date: req.body}] })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))
     }
