@@ -50,11 +50,14 @@ const ModalStyle = styled.div`
 `
 
 
-const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, comment, rating, name }) => {
+const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, comment, rating, name, upload }) => {
 
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
+   
+
+    
 
     return (
         <>
@@ -71,7 +74,7 @@ const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, 
                     </button>
                         <h1>Review this {name}</h1>
                         <h2>Comment:</h2>
-                        <input 
+                        <input
                             value={comment}
                             onChange={handleInputChange}
                             className="comment"
@@ -93,6 +96,10 @@ const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, 
                             <option value="5">5</option>
                         </select>
                         <br />
+                        <input
+                            type="file"
+                            onChange={(e)=>upload(e)}
+                        />
                         <button
                             className="subButt"
                             onClick={saveRev}

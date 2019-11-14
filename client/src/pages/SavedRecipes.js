@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 import ReviewModal from "../components/informationCards/ReviewModal"
+import { uploadFile } from 'react-s3';
+
 
 const SavedStyle = styled.div`
 .searchedRecipes{
@@ -14,8 +16,13 @@ const SavedStyle = styled.div`
     margin-top: 10px;
 }
 `
-
-
+const config = {
+    bucketName: 'sunday-staples',
+    dirName: 'photos', /* optional */
+    region: 'us-east-2',
+    accessKeyId: 'AKIAXMUCGPAPCFGQBIF5',
+    secretAccessKey: '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',
+}
 
 class SavedRecipes extends Component {
 
@@ -26,8 +33,17 @@ class SavedRecipes extends Component {
         showModal: false,
         reviewId: {},
         comment: "",
-        rating: 0
+        rating: 0,
+        imagelink: ""
     }
+
+    upload = e => {
+        console.log(e.target.files[0])
+        uploadFile(e.target.files[0], config)
+            .then(res => this.setState({imagelink: res.location}))
+            .catch(err => console.log(err))
+    }
+
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -119,7 +135,8 @@ class SavedRecipes extends Component {
                                     handleReview={() => this.handleReview({
                                         id: recipe._id,
                                         name: recipe.title,
-                                        url: recipe.url
+                                        url: recipe.url,
+                                        defaultImage: recipe.image
                                     })}
                                     handleAdd={() => this.handleAdd({
                                         user: this.props.auth.user.id,
@@ -135,6 +152,7 @@ class SavedRecipes extends Component {
                                 name={this.state.reviewId.name}
                                 handleInputChange={this.handleInputChange}
                                 comment={this.state.comment}
+                                upload={this.upload}
                                 rating={this.state.rating}
                                 saveRev={() => this.saveRev({
                                     user: this.props.auth.user.id,
@@ -142,7 +160,9 @@ class SavedRecipes extends Component {
                                     title: this.state.reviewId.name,
                                     url: this.state.reviewId.url,
                                     comment: this.state.comment,
-                                    stars: this.state.rating
+                                    stars: this.state.rating,
+                                    image: this.state.imagelink,
+                                    defaultImage: this.state.reviewId.defaultImage
                                 })}
                             >
                             </ReviewModal>
