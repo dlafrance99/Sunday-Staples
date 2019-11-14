@@ -60,6 +60,19 @@ const RecipeCard = (props) => {
         }
     }
 
+    const addbutton = () => {
+        if (props.database) {
+            return (
+                <button
+                    onClick={props.handleAdd}
+                    className="revButt"
+                >
+                    Add to Shopping List
+                </button>
+            )
+        }
+    }
+
     return (
         <>
             <RecipeCardstyle>
@@ -83,6 +96,8 @@ const RecipeCard = (props) => {
                     </button>
 
                     {reviewbutton()}
+
+                    {addbutton()}
                 </li>
             </RecipeCardstyle>
         </>
