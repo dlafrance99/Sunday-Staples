@@ -27,10 +27,17 @@ export default {
     },
 
     addIngredients: function(info) {
-        console.log(info.id, info.user, info.ingredients)
+        console.log(info)
         return axios.put(`api/shoppingList/update/${info.id}`, info.ingredients)
     },
 
+    deleteIngredient: function(id, item) {
+        return axios.put(`api/shoppingList/current/${id}`, {ingredient: item})
+    },
+
+    completeList: function(id) {
+        return axios.put(`/api/shoppingList/${id}`)
+    },
     getCurrent: function (user) {
         console.log(user)
         return axios.get(`/api/shoppingList/${user}`)
