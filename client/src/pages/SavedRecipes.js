@@ -36,6 +36,7 @@ class SavedRecipes extends Component {
         });
     };
 
+
     componentDidMount() {
         this.getSaved(this.state.user)
         this.getCurrent(this.state.user);
@@ -56,7 +57,7 @@ class SavedRecipes extends Component {
     handleDelete = id => {
         console.log(id)
         API.deleteSaved(id.id)
-            .then(res => this.getSaved())
+            .then(res => this.getSaved(this.state.user))
             .catch(err => console.log(err))
     }
 

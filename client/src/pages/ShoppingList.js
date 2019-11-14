@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import dateFormat from "dateformat";
 import styled from "styled-components";
 import API from "../utils/API";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
+import List from "../components/informationCards/ShoppingList"
 
 const ShopList = styled.div`
 .myShoppingList{
@@ -38,10 +40,14 @@ hr{
 
 class ShoppingList extends Component {
     state = {
-        currentList: [],
+        currentList: { 
+            id: "",
+            ingredients: [],
+            complete: ""
+        },
         previousLists: [],
-        user: this.props.auth.user.id  
-    }
+        user: this.props.auth.user.id
+        }
 
     componentDidMount() {
         this.getCurrent(this.state.user);
@@ -49,35 +55,69 @@ class ShoppingList extends Component {
     }
 
     getCurrent = (user) => {
-        API.findCurrentList(user)
-            .then(res => this.setState({ currentList: res.data }))
+        console.log("Deleted an item")
+        API.getCurrent(user)
+            .then(res => this.setState({currentList: {
+               id: res.data[0]._id,
+               ingredients: res.data[0].ingredients,
+               complete: res.data[0].complete
+            }}))
             .catch(err => console.log(err))
     }
 
     getPrevious = (user) => {
-        API.findCurrentList(user)
+        API.getPrevious(user)
             .then(res => this.setState({ previousLists: res.data }))
             .catch(err => console.log(err))
     }
 
-    render() {
-     console.log(this.props.auth.user.id)
+    completeList = (id) => {
+        API.completeList(id)
+            .then(this.getCurrent(this.state.user))
+            .catch(err => console.log(err))
 
+    }
+
+    handleRemove = (user, item) => {
+        API.deleteIngredient(user, item)
+            .then(res => this.getCurrent(this.state.user))
+            .catch(err => console.log(err))
+    }
+
+    render() {
+      console.log(this.props.auth.user.id)
+      console.log(this.state.previousLists)
+      
     return (
         <>
         <ShopList>
             <div className="myShoppingList">
                 <h3>My Shopping List:</h3>
-                <hr />
+                <List
+                id={this.state.currentList.id}
+                handleRemove={this.handleRemove}
+                ingredients= {this.state.currentList.ingredients}
+                />
                 <h5>Item to Add:</h5>
                 <input type="text"></input>
                 <button className="ingredientButtons">Add Item</button>
                 <br />
-                <button className="ingredientButtons">Done</button>
+                <button 
+                className="ingredientButtons"
+                onClick={() => this.completeList(this.state.currentList.id)}
+                >
+                    Done
+                </button>
             </div>
 
             <div className="pastShoppingList">
                 <h3>Past Shopping List:</h3>
+                {this.state.previousLists.map(list =>
+                <ul>
+                    <li><button>{dateFormat(list.date, "mm/dd/yyyy")}</button></li>
+                </ul>
+                    
+                    )}
                 <hr />
             </div>
         </ShopList>
