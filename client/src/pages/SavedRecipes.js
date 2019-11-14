@@ -19,7 +19,9 @@ const SavedStyle = styled.div`
 const config = {
     bucketName: 'sunday-staples',
     dirName: 'photos', /* optional */
-    region: 'us-east-2'
+    region: 'us-east-2',
+    accessKeyId: process.env.REACT_APP_ACCESSKEY,
+    secretAccessKey: process.env.REACT_APP_SECRETKEY
 }
 
 class SavedRecipes extends Component {
@@ -36,6 +38,8 @@ class SavedRecipes extends Component {
     }
 
     upload = e => {
+        console.log(process.env.REACT_APP_ACCESSKEY)
+        console.log(process.env.REACT_APP_SECRETKEY)
         console.log(e.target.files[0])
         uploadFile(e.target.files[0], config)
             .then(res => this.setState({imagelink: res.location}))
