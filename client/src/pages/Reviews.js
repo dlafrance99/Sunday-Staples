@@ -6,6 +6,7 @@ import Reviewcard from "../components/informationCards/ReviewsCard"
 const Reviewstyle = styled.div`
 background-color: #b3e6ca;
 height: 100vh;
+
 `
 
 
@@ -36,6 +37,8 @@ class Reviews extends Component {
                             link={review.url}
                             comment={review.comment}
                             stars={review.stars}
+                            image={review.image}
+                            default={review.defaultImage}
                         />
                     ))}
                 </Reviewstyle>
