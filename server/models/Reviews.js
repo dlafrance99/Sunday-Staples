@@ -8,6 +8,8 @@ const reviewsSchema = new Schema({
     url: {type: String, required: true},
     stars: {type: Number, required: true},
     comment: {type: String, required: true},
+    image: {type: String},
+    defaultImage: {type: String},
     date: {
         type: Date,
         default: Date.now

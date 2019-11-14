@@ -24,8 +24,9 @@ const Reviewcard = (props) => {
                         <h4>{props.name}</h4>
                         <h2 >{props.title}</h2>
                         <a href={props.link}>Recipe link</a>
-                        <p>{props.comment}</p>
-                        <p>{props.stars}</p>
+                        <p>Comments: {props.comment}</p>
+                        <p>Rating: {props.stars}/5</p>
+                        <img src={props.image ? (props.image): (props.default)} alt="review"/>
                     </div>
             </ReviewPage>
         </>
