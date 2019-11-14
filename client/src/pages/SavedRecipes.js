@@ -21,7 +21,7 @@ const config = {
     dirName: 'photos', /* optional */
     region: 'us-east-2',
     accessKeyId: process.env.REACT_APP_ACCESSKEY,
-    secretAccessKey: process.env.REACT_APP_SECRETKEY,
+    secretAccessKey: process.env.REACT_APP_SECRETKEY
 }
 
 class SavedRecipes extends Component {
