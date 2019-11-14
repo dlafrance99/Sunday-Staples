@@ -36,6 +36,9 @@ hr{
     background-color: transparent;
 }
 `
+const StyledListItem = styled.ul`
+    display: ${props => props.show ? 'block' : 'none'};
+`
 
 
 class ShoppingList extends Component {
@@ -46,16 +49,19 @@ class ShoppingList extends Component {
             complete: ""
         },
         previousLists: [],
-        user: this.props.auth.user.id
+        user: this.props.auth.user.id,
+        added: "",
+        showPrev: false
         }
 
     componentDidMount() {
         this.getCurrent(this.state.user);
         this.getPrevious(this.state.user);
-    }
+    };
+    
+    test = (e) => {this.setState({showPrev: true})}
 
     getCurrent = (user) => {
-        console.log("Deleted an item")
         API.getCurrent(user)
             .then(res => this.setState({currentList: {
                id: res.data[0]._id,
@@ -63,20 +69,50 @@ class ShoppingList extends Component {
                complete: res.data[0].complete
             }}))
             .catch(err => console.log(err))
-    }
+    };
 
     getPrevious = (user) => {
         API.getPrevious(user)
             .then(res => this.setState({ previousLists: res.data }))
             .catch(err => console.log(err))
-    }
+    };
 
     completeList = (id) => {
         API.completeList(id)
-            .then(this.getCurrent(this.state.user))
+            .then(res => this.getCurrent(this.state.user))
             .catch(err => console.log(err))
 
-    }
+    };
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+    
+        this.setState({
+          [name]: value
+        });
+    };
+
+    handleFormSubmit = (event) => {
+        event.preventDefault();
+    
+        if (this.state.currentList.ingredients.length === 0){
+            API.createShoppingList({
+                user: this.state.user,
+                ingredients: this.state.added
+            })
+              .then(res => this.setState({ currentList: res.data }))
+              .then(this.setState({added: ""}))
+              .catch(err => console.log(err))
+        } else {
+            API.addIngredients({
+                id: this.state.currentList.id,
+                ingredients: this.state.added
+            })
+            .then(res => this.setState({ currentList: res.data }))
+            .then(this.setState({added: ""}))
+            .catch(err => console.log(err))
+        }
+    };
 
     handleRemove = (user, item) => {
         API.deleteIngredient(user, item)
@@ -86,7 +122,7 @@ class ShoppingList extends Component {
 
     render() {
       console.log(this.props.auth.user.id)
-      console.log(this.state.previousLists)
+      console.log(this.state.currentList.ingredients)
       
     return (
         <>
@@ -99,8 +135,14 @@ class ShoppingList extends Component {
                 ingredients= {this.state.currentList.ingredients}
                 />
                 <h5>Item to Add:</h5>
-                <input type="text"></input>
-                <button className="ingredientButtons">Add Item</button>
+                <input
+                value={this.state.added}
+                name="added"
+                onChange={this.handleInputChange}
+                type="text"
+                placeholder="Apples"
+                ></input>
+                <button className="ingredientButtons" onClick={this.handleFormSubmit} >Add Item</button>
                 <br />
                 <button 
                 className="ingredientButtons"
@@ -113,8 +155,13 @@ class ShoppingList extends Component {
             <div className="pastShoppingList">
                 <h3>Past Shopping List:</h3>
                 {this.state.previousLists.map(list =>
-                <ul>
-                    <li><button>{dateFormat(list.date, "mm/dd/yyyy")}</button></li>
+                <ul key={list._id}>
+                    <li>
+                        <button onClick={this.test}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
+                        <StyledListItem show={this.state.showPrev} >
+                        {list.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
+                        </StyledListItem>
+                    </li>
                 </ul>
                     
                     )}

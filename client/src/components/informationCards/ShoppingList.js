@@ -4,14 +4,14 @@ import styled from "styled-components"
 const List = (props) => {
     return(
         <>
-        <div>
+        <ul>
             {props.ingredients.map(ingredient => (
                 <li>
                     {ingredient}
                     <button onClick={() => props.handleRemove(props.id, ingredient)}>X</button>
                 </li>
            ))}
-        </div>
+        </ul>
         </>
     )
 }

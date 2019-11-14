@@ -19,9 +19,7 @@ const SavedStyle = styled.div`
 const config = {
     bucketName: 'sunday-staples',
     dirName: 'photos', /* optional */
-    region: 'us-east-2',
-    accessKeyId: 'AKIAXMUCGPAPCFGQBIF5',
-    secretAccessKey: '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',
+    region: 'us-east-2'
 }
 
 class SavedRecipes extends Component {
