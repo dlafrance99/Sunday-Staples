@@ -12,6 +12,9 @@ router.route("/:id")
   .delete(shoppingListController.deleteList)
   .put(shoppingListController.completeList);
 
+router.route("/current/:id")
+  .put(shoppingListController.deleteItem);
+  
 router.route("/previous/:id")
   .get(shoppingListController.findThreeMostRecent);
 

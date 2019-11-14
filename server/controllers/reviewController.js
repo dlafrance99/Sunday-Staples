@@ -17,6 +17,7 @@ module.exports = {
           title: req.body.title,
           url: req.body.url,
           stars: req.body.stars,
+          image: req.body.image,
           comment: req.body.comment
         })
         .then(dbModel => res.json(dbModel))
