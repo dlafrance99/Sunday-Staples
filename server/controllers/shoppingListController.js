@@ -33,10 +33,20 @@ module.exports = {
         .catch(err => res.status(422).json(err))   
     },
     completeList: function(req,res) {
+        console.log(req.params)
         db.ShoppingList
         .update(
-            { $and: [{user: req.body.user}, {complete: false}] },
+            { _id: req.params.id },
             { complete: true })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err))  
+    },
+    deleteItem: function(req,res){
+        db.ShoppingList
+        .update(
+            { "_id" : req.params.id  },
+            { "$pull" : { "ingredients" :  req.body.ingredient}  
+        })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))  
     },

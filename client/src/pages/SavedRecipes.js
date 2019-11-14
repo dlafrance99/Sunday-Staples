@@ -21,7 +21,7 @@ const config = {
     dirName: 'photos', /* optional */
     region: 'us-east-2',
     accessKeyId: process.env.REACT_APP_ACCESSKEY,
-    secretAccessKey: process.env.REACT_APP_SECRETKEY,
+    secretAccessKey: process.env.REACT_APP_SECRETKEY
 }
 
 class SavedRecipes extends Component {
@@ -54,6 +54,7 @@ class SavedRecipes extends Component {
         });
     };
 
+
     componentDidMount() {
         this.getSaved(this.state.user)
         this.getCurrent(this.state.user);
@@ -74,7 +75,7 @@ class SavedRecipes extends Component {
     handleDelete = id => {
         console.log(id)
         API.deleteSaved(id.id)
-            .then(res => this.getSaved())
+            .then(res => this.getSaved(this.state.user))
             .catch(err => console.log(err))
     }
 
