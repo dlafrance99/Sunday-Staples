@@ -3,11 +3,11 @@ import axios from "axios";
 export default {
     //edamam
     getRecipes: function (staple) {
-        return axios.get(`https://api.edamam.com/search?q=${staple}&app_id=66592fe3&app_key=19823d841e3e1f603bdc16d31a5dce43&from=0&to=2`)
+        return axios.get(`https://api.edamam.com/search?q=${staple}&app_id=${process.env.REACT_APP_RECKEY}3&app_key=${process.env.REACT_APP_RECKEY}&from=0&to=2`)
     },
 
     getNutrition: function (nutrient) {
-        return axios.get(`https://api.edamam.com/api/food-database/parser?ingr=${nutrient}&app_id=aeebd946&app_key=66dba634f8298cb2278ffa5bc155fd8c`)
+        return axios.get(`https://api.edamam.com/api/food-database/parser?ingr=${nutrient}&app_id=${process.env.REACT_APP_NUTID}&app_key=${process.env.REACT_APP_NUTKEY}`)
     },
     //saved recipes
     saveRecipe: function (recipe) {
