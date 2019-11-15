@@ -47,6 +47,29 @@ const ModalStyle = styled.div`
     border-radius: 5px;
     padding: 3px;
 }
+
+.uploadButt{
+    margin-top: 10px;
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.uploadLabel{
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
+.comment{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    width: 450px;
+    height: 100px;
+}
 `
 
 
@@ -55,9 +78,9 @@ const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, 
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
-   
 
-    
+
+
 
     return (
         <>
@@ -74,12 +97,13 @@ const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, 
                     </button>
                         <h1>Review this {name}</h1>
                         <h2>Comment:</h2>
-                        <input
+                        <textarea
                             value={comment}
                             onChange={handleInputChange}
                             className="comment"
                             name="comment"
                             placeholder="enter comment"
+                            
                         />
                         <h2>Rating:</h2>
                         <select
@@ -98,8 +122,19 @@ const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, 
                         <br />
                         <input
                             type="file"
-                            onChange={(e)=>upload(e)}
+                            onChange={(e) => upload(e)}
+                            className="uploadButt"
+                            name="file"
+                            id="file"
                         />
+                        <h2>Upload an image of your Review (optional)</h2>
+                        <label
+                            for="file"
+                            className="uploadLabel"
+                        >
+                            Choose a file
+                        </label>
+                        <br />
                         <button
                             className="subButt"
                             onClick={saveRev}

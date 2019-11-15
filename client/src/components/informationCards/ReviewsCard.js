@@ -11,6 +11,8 @@ h4{
     background-color: white;
     padding: 10px;
     border-style: double;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 `
