@@ -36,8 +36,14 @@ hr{
     background-color: transparent;
 }
 `
-const StyledListItem = styled.ul`
+const StyledLis = styled.ul`
     display: ${props => props.show ? 'block' : 'none'};
+`
+
+const ListItem = styled.li`
+    .ingredients {
+        display: ${props => props.isSelected ? "block" : "none"};
+    }
 `
 
 
@@ -49,6 +55,7 @@ class ShoppingList extends Component {
             complete: ""
         },
         previousLists: [],
+        selectedList: null,
         user: this.props.auth.user.id,
         added: "",
         showPrev: false
@@ -64,9 +71,9 @@ class ShoppingList extends Component {
     getCurrent = (user) => {
         API.getCurrent(user)
             .then(res => this.setState({currentList: {
-               id: res.data[0]._id,
-               ingredients: res.data[0].ingredients,
-               complete: res.data[0].complete
+               id: res.data[0] ? res.data[0]._id : "",
+               ingredients: res.data[0] ? res.data[0].ingredients : [],
+               complete: res.data[0] ? res.data[0].complete : false
             }}))
             .catch(err => console.log(err))
     };
@@ -94,22 +101,22 @@ class ShoppingList extends Component {
 
     handleFormSubmit = (event) => {
         event.preventDefault();
-    
+        console.log(this.state.added)
         if (this.state.currentList.ingredients.length === 0){
             API.createShoppingList({
                 user: this.state.user,
                 ingredients: this.state.added
             })
-              .then(res => this.setState({ currentList: res.data }))
-              .then(this.setState({added: ""}))
+              .then(res => this.getCurrent(this.state.user))
+              .then(res => this.setState({added: ""}))
               .catch(err => console.log(err))
         } else {
             API.addIngredients({
                 id: this.state.currentList.id,
                 ingredients: this.state.added
             })
-            .then(res => this.setState({ currentList: res.data }))
-            .then(this.setState({added: ""}))
+            .then(res => this.getCurrent(this.state.user))
+            .then(res => this.setState({added: ""}))
             .catch(err => console.log(err))
         }
     };
@@ -120,15 +127,24 @@ class ShoppingList extends Component {
             .catch(err => console.log(err))
     }
 
+    clearList = (id) => {
+        API.clearList(id)
+            .then(res => this.getCurrent(this.state.user))
+            .catch(err => console.log(err))
+    }
+
     render() {
       console.log(this.props.auth.user.id)
       console.log(this.state.currentList.ingredients)
+      console.log(this.state.added)
       
     return (
         <>
         <ShopList>
             <div className="myShoppingList">
                 <h3>My Shopping List:</h3>
+                <hr />
+                <button onClick={() => this.clearList(this.state.currentList.id)}>Clear</button>
                 <List
                 id={this.state.currentList.id}
                 handleRemove={this.handleRemove}
@@ -154,18 +170,18 @@ class ShoppingList extends Component {
 
             <div className="pastShoppingList">
                 <h3>Past Shopping List:</h3>
+                <hr />
+                <ul>
                 {this.state.previousLists.map(list =>
-                <ul key={list._id}>
-                    <li>
-                        <button onClick={this.test}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
-                        <StyledListItem show={this.state.showPrev} >
-                        {list.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}
-                        </StyledListItem>
-                    </li>
-                </ul>
+                    <ListItem key={list._id} isSelected={list === this.state.selectedList}>
+                        <button onClick={() => this.setState({ selectedList: list })}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
+                        <div className="ingredients">
+                            {list.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}   
+                        </div> 
+                    </ListItem>
                     
                     )}
-                <hr />
+                    </ul>
             </div>
         </ShopList>
         </>
