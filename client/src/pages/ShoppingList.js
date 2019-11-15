@@ -9,6 +9,7 @@ import List from "../components/informationCards/ShoppingList"
 
 const ShopList = styled.div`
 .myShoppingList{
+    background-color: #EDF2F4;
     width: 35vw;
     margin-left: 10vw;
     margin-top: 20px;
@@ -34,6 +35,20 @@ hr{
 }
 .ingredientButtons {
     background-color: transparent;
+    margin-top: 22px;
+    margin-left: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
+.clearButt{
+    float: right;
+    position: relative;
+    top: -25px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
 }
 `
 const StyledLis = styled.ul`
@@ -143,8 +158,8 @@ class ShoppingList extends Component {
         <ShopList>
             <div className="myShoppingList">
                 <h3>My Shopping List:</h3>
+                <button className="clearButt" onClick={() => this.clearList(this.state.currentList.id)}>Clear Shopping List</button>
                 <hr />
-                <button onClick={() => this.clearList(this.state.currentList.id)}>Clear</button>
                 <List
                 id={this.state.currentList.id}
                 handleRemove={this.handleRemove}

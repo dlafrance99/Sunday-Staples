@@ -19,7 +19,7 @@ h2, h3, h4 {
     margin-top: 5px;
 }
 .welcome {
-    background-color: #9fdfbc;
+    background-color: #85BDA6;
     width: 78vw;
     margin-left: 10vw;
     padding: 1vw;
@@ -83,7 +83,7 @@ hr {
     margin-top: 5px;
     margin-bottom: 1%;
     color: white;
-    background-color: #108a8a;
+    background-color: #2B2D42;
     font-size: 2rem;
     font-family: 'Playfair Display', serif;
     text-align: center;

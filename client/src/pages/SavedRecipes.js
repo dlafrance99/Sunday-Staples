@@ -92,7 +92,9 @@ class SavedRecipes extends Component {
     
         if (this.state.currentList.length === 0){
             API.createShoppingList(info)
-              .then(res => this.setState({ currentList: res.data }))
+              .then(res => {
+                  this.setState({ currentList: res.data })
+              })
               .catch(err => console.log(err))
         } else {
             API.addIngredients(info)

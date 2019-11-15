@@ -4,8 +4,10 @@ import styled from "styled-components"
 const RecipeCardstyle = styled.div`
 width: 38%;
 height: 950px;
+background-color: #EDF2F4;
 border: 5px solid;
 border-radius: 5px;
+border-color: #2B2D42;
 padding-left: 2vw;
 padding-right: 2vw;
 padding-bottom: 10px;

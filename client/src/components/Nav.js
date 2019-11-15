@@ -6,13 +6,13 @@ import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 
 const NavWrapper = styled.div`
-background-color: #d9d9d9;
+background-color: #F1E0C5;
 color: black;
 height: 60px;
 width: 100vw;
 text-decoration: none;
 .nav-link {
-    color: #006666;
+    color: #2B2D42;
     margin-left: 10px;
     position: relative;
     left: 55vw;
@@ -22,6 +22,7 @@ text-decoration: none;
 }
 h1 {
     margin: 0;
+    color: #2B2D42;
     padding: 10px;
     margin-left: 5vw;
     font-family: 'Playfair Display', serif;
@@ -35,7 +36,7 @@ button{
 }
 .searchDropDown{
     width: 115px;
-    background-color: #d9d9d9;
+    background-color: #F1E0C5;
     height: 3rem;
     position: absolute;
     top: 37px;
@@ -44,14 +45,14 @@ button{
     padding-bottom: 0;
 }
 .searched{
-    color: #006666;
+    color: #2B2D42;
     margin-right:5px;
     text-decoration: none;
 
 }
 .DashDropDown{
     width: 115px;
-    background-color: #d9d9d9;
+    background-color: #F1E0C5;
     height: 3rem;
     position: absolute;
     top: 37px;
@@ -60,7 +61,7 @@ button{
     padding-bottom: 0;
 }
 .Dashed{
-    color: #006666;
+    color: #2B2D42;
     margin-right:5px;
     text-decoration: none;
 

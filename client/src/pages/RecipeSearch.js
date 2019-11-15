@@ -12,7 +12,7 @@ h1{
     margin: 0;
 }
 .search-instructions{
-    background-color: #9fdfbc;
+    background-color: #EF233C;
     width: 80vw;
     margin-left: 10vw;
     margin-top: 10px;
@@ -23,7 +23,7 @@ h1{
     margin-right: 5px;
 }
 .searchDiv{
-    background-color: #F8F8F8;
+    background-color: #EDF2F4;
     width: 80vw;
     margin-left: 10vw;
     padding: 10px;
@@ -84,12 +84,10 @@ class RecipeSearch extends Component {
     handlesave = recipe => {
         API.saveRecipe(recipe)
             .then(res => {
-                console.log(res.data.url)
                 const temparr = [...this.state.recipes];
                 const savedIndex = temparr.findIndex(recipe => recipe.recipe.url === res.data.url)
 
                 temparr[savedIndex].saved = true;
-                console.log(temparr)
                 this.setState({ recipes: temparr })
             })
             .catch(err => console.log(err))
