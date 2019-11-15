@@ -1,30 +1,67 @@
-import React from "react"
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
-import Nav from "./components/Nav"
-import Home from "./pages/Home"
-import RecipeSearch from "./pages/RecipeSearch"
-import NutritionSearch from "./pages/NutritionSearch"
-import Reviews from "./pages/Reviews"
-import SavedRecipes from "./pages/SavedRecipes"
-import ShoppingList from "./pages/ShoppingList"
+import React from "react";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+
+import { Provider } from "react-redux";
+import store from "./store";
+
+import Nav from "./components/Nav";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import Home from "./pages/Home";
+import RecipeSearch from "./pages/RecipeSearch";
+import NutritionSearch from "./pages/NutritionSearch";
+import Reviews from "./pages/Reviews";
+import SavedRecipes from "./pages/SavedRecipes";
+import ShoppingList from "./pages/ShoppingList";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import Dashboard from "./components/dashboard/Dashboard";
+
+// Check for token to keep user logged in
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(token);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+// Check for expired token
+  const currentTime = Date.now() / 1000; // to get in milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Redirect to login
+    window.location.href = "./login";
+  }
+}
 
 function App () {
     return (
-       <Router>
+      <Provider store={store}> 
+        <Router>
            <div>
                <Nav />
                <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/Home" component={Home} />
-                    <Route exact path="/RecipeSearch" component={RecipeSearch} />
-                    <Route exact path="/NutritionSearch" component={NutritionSearch} />
-                    <Route exact path="/SavedRecipes" component={SavedRecipes} />
-                    <Route exact path="/ShoppingList" component={ShoppingList} />
-                    <Route exact path="/Reviews" component={Reviews} />
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/recipe-search" component={RecipeSearch} />
+                    <Route exact path="/nutrition-search" component={NutritionSearch} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/reviews" component={Reviews} />
+                    <Switch>
+                    <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                    <PrivateRoute exact path="/saved-recipes" component={SavedRecipes} />
+                    <PrivateRoute exact path="/shopping-list" component={ShoppingList} />
+                    </Switch>
                </Switch>
            </div>
        </Router>
-    )
+      </Provider>
+    );
 }
 
 export default App;
