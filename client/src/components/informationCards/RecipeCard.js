@@ -3,8 +3,9 @@ import styled from "styled-components"
 
 const RecipeCardstyle = styled.div`
 width: 40%;
-height: 690px;
+height: 840px;
 border: 5px solid;
+border-radius: 5px;
 padding-left: 2vw;
 padding-bottom: 10px;
 float: left;
@@ -20,7 +21,7 @@ img{
 .saveRecButt{
     background-color: transparent;
     margin-top: 22px;
-    margin-left: 30%;
+    margin-left: 15%;
     border: 2px solid black;
     border-radius: 5px;
     padding: 3px;
@@ -39,7 +40,7 @@ const RecipeCard = (props) => {
 
     const button = () => {
         if (props.database) {
-            return "Delete!"
+            return "Delete From Saved"
         } else if (props.saved) {
             return "Saved!"
         } else {
@@ -83,8 +84,9 @@ const RecipeCard = (props) => {
                     <img src={props.image} alt="recipe"></img>
                     <h4>Ingredients: </h4>
                     <ul>
-                        {props.ingredients.map(ingredient => (
+                        {props.ingredients.map((ingredient, i) => (
                             <li
+                            key={i}
                             >{ingredient}</li>
                         ))}
                     </ul>

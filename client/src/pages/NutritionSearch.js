@@ -62,7 +62,7 @@ class NutritionSearch extends Component {
         event.preventDefault();
         if (this.state.ingredient) {
             API.getNutrition(this.state.ingredient)
-                .then(res => this.setState({nutrition: res.data.hints}))
+                .then(res => this.setState({ nutrition: res.data.hints }))
                 .catch(err => console.log(err))
         }
     }
@@ -91,12 +91,12 @@ class NutritionSearch extends Component {
                             placeholder="e.g spinach"
                         />
 
-                        <input 
-                        value={this.state.quantity}
-                        onChange={this.handleInputChange}
-                        name="quantity"
-                        className="searchInput" 
-                        placeholder="qty must be in grams"
+                        <input
+                            value={this.state.quantity}
+                            onChange={this.handleInputChange}
+                            name="quantity"
+                            className="searchInput"
+                            placeholder="qty must be in grams"
                         />
 
                         <button
@@ -116,18 +116,23 @@ class NutritionSearch extends Component {
                                 <th className="tablehead">Energy</th>
                                 <th className="tablehead">Nutrients</th>
                             </tr>
-                            {this.state.nutrition.slice(0,5).map(info => (
-                                <NutritionCard
-                                food = {info.food.label}
-                                quantity={this.state.quantity}
-                                energy={info.food.nutrients.ENERC_KCAL}
-                                fat = {info.food.nutrients.FAT}
-                                fiber= {info.food.nutrients.FIBTG}
-                                protein = {info.food.nutrients.PROCNT}
-                                carb = {info.food.nutrients.CHOCDF}
-                                />
-                            ))}
+                            <tbody>
 
+                                {this.state.nutrition.slice(0, 5).map((info, i) => (
+                                    <NutritionCard
+                                        className="nutCard"
+                                        food={info.food.label}
+                                        key={i}
+                                        quantity={this.state.quantity}
+                                        energy={info.food.nutrients.ENERC_KCAL}
+                                        fat={info.food.nutrients.FAT}
+                                        fiber={info.food.nutrients.FIBTG}
+                                        protein={info.food.nutrients.PROCNT}
+                                        carb={info.food.nutrients.CHOCDF}
+                                    />
+                                ))}
+
+                            </tbody>
                         </table>
                     </div>
                 </NutSearch>

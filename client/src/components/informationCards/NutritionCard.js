@@ -26,6 +26,7 @@ const NutritionCard = (props) => {
                     </NutCardstyle>
                 </td>
             </tr>
+            
         </>
     )
 }
