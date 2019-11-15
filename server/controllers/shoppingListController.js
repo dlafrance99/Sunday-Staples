@@ -25,10 +25,11 @@ module.exports = {
         .catch(err => res.status(422).json(err))
     },
     addIngredients: function(req,res) {
+        console.log(req.body)
         db.ShoppingList
         .update(
             { _id: req.params.id },
-            {$push: {ingredients: req.body}})
+            {$push: {ingredients: req.body.ingredients}})
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))   
     },
@@ -52,7 +53,7 @@ module.exports = {
     },
     deleteList: function(req,res) {
         db.ShoppingList
-        .findById({ _id: req.body.id})
+        .findById({ _id: req.params.id})
         .then(dbModel => dbModel.remove())
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err))

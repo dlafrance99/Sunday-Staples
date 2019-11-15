@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -10,13 +11,15 @@ app.use(
   })
 );
 app.use(express.json());
-// DB Config
-const db = require("./config/keys").mongoURI;
-console.log(db)
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+    process.env.MONGODB_URI,
     { useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB successfully connected"))
