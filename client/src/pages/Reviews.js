@@ -4,7 +4,7 @@ import API from "../utils/API";
 import Reviewcard from "../components/informationCards/ReviewsCard"
 
 const Reviewstyle = styled.div`
-background-color: #b3e6ca;
+background-color: #EDF2F4;
 
 `
 

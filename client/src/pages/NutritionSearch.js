@@ -8,14 +8,14 @@ h1{
     margin: 0;
 }
 .search-instructions{
-    background-color: #9fdfbc;
+    background-color: #EF233C;
     width: 80vw;
     margin-left: 10vw;
     margin-top: 10px;
     padding: 10px;
 }
 .searchDiv{
-    background-color: #F8F8F8;
+    background-color: #EDF2F4;
     width: 80vw;
     margin-left: 10vw;
     padding: 10px;
