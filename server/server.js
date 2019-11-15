@@ -12,13 +12,18 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 // DB Config
 const db = require("./config/keys").mongoURI;
 console.log(db)
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+    process.env.MONGODB_URI || db,
     { useNewUrlParser: true }
   )
   .then(() => console.log("MongoDB successfully connected"))
