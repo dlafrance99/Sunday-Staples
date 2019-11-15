@@ -55,8 +55,11 @@ hr {
 }
 `
 
-const Home = () => {
-    return (
+class Home extends Component {
+
+    
+    render() {
+        return (
         <>
             <Landing />
             <Homestyle>
@@ -94,6 +97,7 @@ const Home = () => {
             </Homestyle>
         </>
     )
+}
 }
 
 export default Home;
