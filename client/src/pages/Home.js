@@ -10,7 +10,7 @@ h2, h3, h4 {
 }
 
 .Home-image {
-    background-color: grey;
+    background-color: white;
     height: 250px;
     width: 80vw;
     margin-left: 10vw;
@@ -56,48 +56,94 @@ hr {
 `
 
 class Home extends Component {
+    state = {
+        imageArr: ["assets/images/blackberry.jpg",
+            "assets/images/blue.jpg",
+            "assets/images/book.jpg",
+            "assets/images/breakfast.jpg",
+            "assets/images/burrito.jpg",
+            "assets/images/cake.jpg",
+            "assets/images/castiron.jpg",
+            "assets/images/chocolate.jpg",
+            "assets/images/flour.jpg",
+            "assets/images/fruit.jpg",
+            "assets/images/garlic.jpg",
+            "assets/images/gather.jpg",
+            "assets/images/macroons.jpg",
+            "assets/images/milkshake.jpg",
+            "assets/images/pasta.jpg",
+            "assets/images/peanutbutter.jpg",
+            "assets/images/pho.jpg",
+            "assets/images/pie.jpg",
+            "assets/images/protein.jpg",
+            "assets/images/spice.jpg",
+            "assets/images/strawberry.jpg",
+            "assets/images/tomato.jpg",
+            "assets/images/vegebowl.jpg"],
+        homeimage: "",
+    }
+
+    componentDidMount() {
+        this.homeImage();
+    }
 
     
+    homeImage = () => {
+        const randomNum = (Math.floor(Math.random() * this.state.imageArr.length));
+        
+        this.setState({ homeimage: this.state.imageArr[randomNum] });
+        
+        setTimeout(() => {this.nextImage();}, 5000);
+    }
+    
+    nextImage = () => {
+        const randomNum = (Math.floor(Math.random() * this.state.imageArr.length));
+        
+        this.setState({ homeimage: this.state.imageArr[randomNum] });
+
+        setTimeout(() => {this.homeImage();}, 5000);
+    }
+
     render() {
         return (
-        <>
-            <Landing />
-            <Homestyle>
-                <div className="Home-image">
-                    <img className="Home-Images" src="assets/images/blackberry.jpg" />
-                </div>
+            <>
+                <Landing />
+                <Homestyle>
+                    <div className="Home-image">
+                        <img className="Home-Images" src={this.state.homeimage} />
+                    </div>
 
-                <div className="welcome">
-                    <h2 className="title-text">
-                        Welcome to Sunday Staples
+                    <div className="welcome">
+                        <h2 className="title-text">
+                            Welcome to Sunday Staples
                     </h2>
 
-                    <h3 className="title-text">
-                        Our website is designed to help make meal planning easier for you!
+                        <h3 className="title-text">
+                            Our website is designed to help make meal planning easier for you!
                     </h3>
 
-                    <hr />
+                        <hr />
 
-                    <p>
-                        We've created a set of tools that add variety to your meal planning, provide food data to help you stay on track, and organize your shopping to save you time! Check out the Recipe Search and input one of your Sunday Staples (e.g. Chicken, Broccoli, Eggs, Oats, Bananas, etc.) to find a new recipe to try out. Utilize the Nutrition Search to find out the nutritional value of any food so that you can keep track of points, calories, carbs, fat, protein and fiber. View the Shopping List page to add items to your list or view ingredients that you added from a searched recipe. Finally, scroll through the Reviews to see what other people have loved or hated to get some ideas of what to try and what to steer clear of.
+                        <p>
+                            We've created a set of tools that add variety to your meal planning, provide food data to help you stay on track, and organize your shopping to save you time! Check out the Recipe Search and input one of your Sunday Staples (e.g. Chicken, Broccoli, Eggs, Oats, Bananas, etc.) to find a new recipe to try out. Utilize the Nutrition Search to find out the nutritional value of any food so that you can keep track of points, calories, carbs, fat, protein and fiber. View the Shopping List page to add items to your list or view ingredients that you added from a searched recipe. Finally, scroll through the Reviews to see what other people have loved or hated to get some ideas of what to try and what to steer clear of.
                     </p>
 
-                    <p>
-                        Food should bring joy, not frustration. Using our tools will certainly make Sunday meal planning easier and more convenient. Think of all the time you'll save and the inspiration that will spark! Be sure to take pictures of your creations and tag #SundayStaples so we can see what you make!
+                        <p>
+                            Food should bring joy, not frustration. Using our tools will certainly make Sunday meal planning easier and more convenient. Think of all the time you'll save and the inspiration that will spark! Be sure to take pictures of your creations and tag #SundayStaples so we can see what you make!
                     </p>
-                </div>
+                    </div>
 
-                <div className="PopRecipes">
-                    <h4 className="popRecipeTitle">
-                        Popular Recipes
+                    <div className="PopRecipes">
+                        <h4 className="popRecipeTitle">
+                            Popular Recipes
                     </h4>
 
 
-                </div>
-            </Homestyle>
-        </>
-    )
-}
+                    </div>
+                </Homestyle>
+            </>
+        )
+    }
 }
 
 export default Home;
