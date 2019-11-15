@@ -27,8 +27,8 @@ export default {
     },
 
     addIngredients: function(info) {
-        console.log(info)
-        return axios.put(`api/shoppingList/update/${info.id}`, info.ingredients)
+        console.log(info.ingredients)
+        return axios.put(`api/shoppingList/update/${info.id}`, {ingredients: info.ingredients})
     },
 
     deleteIngredient: function(id, item) {
@@ -45,6 +45,10 @@ export default {
 
     getPrevious: function (user) {
         return axios.get(`/api/shoppingList/previous/${user}`)
+    },
+
+    clearList: function (id) {
+        return axios.delete(`/api/shoppingList/${id}`)
     },
     //Reviews
     saveReview: function(review) {
