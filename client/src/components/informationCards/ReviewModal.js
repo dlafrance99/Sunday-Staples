@@ -73,13 +73,13 @@ const ModalStyle = styled.div`
 `
 
 
-const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, comment, rating, name, upload }) => {
+const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, comment, rating, name, upload, imageLink }) => {
 
 
     const showHideClassName = show ? "modal display-block" : "modal display-none";
 
 
-
+    
 
 
     return (
@@ -132,7 +132,7 @@ const ReviewModal = ({ handleClose, show, children, saveRev, handleInputChange, 
                             for="file"
                             className="uploadLabel"
                         >
-                            Choose a file
+                            {imageLink ? "Uploaded" : "Choose a file"}
                         </label>
                         <br />
                         <button

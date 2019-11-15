@@ -156,6 +156,7 @@ class SavedRecipes extends Component {
                                 comment={this.state.comment}
                                 upload={this.upload}
                                 rating={this.state.rating}
+                                imageLink = {this.state.imagelink}
                                 saveRev={() => this.saveRev({
                                     user: this.props.auth.user.id,
                                     alias: this.props.auth.user.name,
