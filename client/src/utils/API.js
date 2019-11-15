@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
     //edamam
     getRecipes: function (staple) {
-        return axios.get(`https://api.edamam.com/search?q=${staple}&app_id=${process.env.REACT_APP_RECKEY}3&app_key=${process.env.REACT_APP_RECKEY}&from=0&to=2`)
+        return axios.get(`https://api.edamam.com/search?q=${staple}&app_id=${process.env.REACT_APP_RECKEY}&app_key=${process.env.REACT_APP_RECKEY}&from=0&to=2`)
     },
 
     getNutrition: function (nutrient) {
