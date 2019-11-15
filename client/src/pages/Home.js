@@ -33,6 +33,42 @@ hr {
     font-family: 'Playfair Display', serif;
 }
 
+.Icons {
+    width: 80vw;
+    margin-left: 10vw;
+}
+
+.iconCard {
+  height: 15vw;
+  width: 15vw;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  margin: 2%;
+  padding: 2% 1% 0;
+}
+
+.icon1 {
+    background-color: #9BC9B6;
+}
+
+.icon2 {
+    background-color: #F3E5CF;
+}
+
+.icon3 {
+    background-color: #787986;
+}
+
+.icon4 {
+    background-color: #F0374D;
+}
+
+.icon {
+    width: 5vw;
+    margin-top: 17%;
+}
+
 .PopRecipes {
     width: 80vw;
     height: 410px;
@@ -151,7 +187,28 @@ class Home extends Component {
                             Food should bring joy, not frustration. Using our tools will certainly make Sunday meal planning easier and more convenient. Think of all the time you'll save and the inspiration that will spark! Be sure to take pictures of your creations and tag #SundayStaples so we can see what you make!
                     </p>
                     </div>
-
+                    <div className="Icons">
+                        <p className="iconCard icon1">
+                        <img className="icon" src="assets/images/recipe-book.png" alt="recipe icon" />
+                        <br/>
+                        Search Recipes
+                        </p>
+                        <p className="iconCard icon2">
+                        <img className="icon" src="assets/images/plan.png" alt="list icon" />
+                        <br/>
+                        Search Nutrition
+                        </p>
+                        <p className="iconCard icon3">
+                        <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
+                        <br/>
+                        Save Recipes
+                        </p>
+                        <p className="iconCard icon4">
+                        <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
+                        <br/>
+                        Create Shopping List
+                        </p>
+                    </div>
                     <div className="PopRecipes">
                         <h4 className="popRecipeTitle">
                             Popular Recipes
