@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import Landing from "../components/Landing";
 
@@ -49,15 +49,19 @@ hr {
     text-align: center;
     padding: 1%;
 }
+.Home-Images{
+    height: 250px;
+    width: 80vw;
+}
 `
 
 const Home = () => {
     return (
         <>
-        <Landing />
+            <Landing />
             <Homestyle>
                 <div className="Home-image">
-
+                    <img className="Home-Images" src="assets/images/blackberry.jpg" />
                 </div>
 
                 <div className="welcome">
