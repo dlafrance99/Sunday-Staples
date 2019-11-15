@@ -6,8 +6,7 @@ const featuredRecipeSchema = new Schema({
     url: {type: String, required: true},
     image: {type: String},
     totalTime: {type: Number},
-    servings: {type: Number},
-    ingredients: {type: Array}
+    servings: {type: Number}
 });
 
 module.exports = featuredRecipes = mongoose.model("FeaturedRecipes", featuredRecipeSchema);

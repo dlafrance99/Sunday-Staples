@@ -17,11 +17,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Connect to MongoDB
-mongoose
-  .connect(
-    process.env.MONGODB_URI,
-    { useNewUrlParser: true }
-  )
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true })
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(`This is the error:`, err));
 
