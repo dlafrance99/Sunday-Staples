@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components"
 
 const RecipeCardstyle = styled.div`
-width: 40%;
-height: 840px;
+width: 38%;
+height: 950px;
 border: 5px solid;
 border-radius: 5px;
 padding-left: 2vw;
+padding-right: 2vw;
 padding-bottom: 10px;
 float: left;
 margin-left: 5%;
