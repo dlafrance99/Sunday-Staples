@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import Landing from "../components/Landing";
+import API from "../utils/API";
+import Featured from "../components/informationCards/Featured";
 
 const Homestyle = styled.div`
 margin: auto;
@@ -33,6 +35,7 @@ hr {
 
 .PopRecipes {
     width: 80vw;
+    height: 410px;
     margin-left: 10vw;
     margin-top: 5px;
     border: 2px solid;
@@ -42,6 +45,7 @@ hr {
     width: 95%;
     margin-left: 1.5%;
     margin-top: 5px;
+    margin-bottom: 1%;
     color: white;
     background-color: #108a8a;
     font-size: 2rem;
@@ -53,8 +57,29 @@ hr {
 
 class Home extends Component {
 
-    
+    state = {
+        featuredRecipes: [],
+        threeRecipes: []
+    }
+
+    componentDidMount() {
+        this.getFeatured()
+    }
+
+    getFeatured = () => {
+        API.getFeatured()
+            .then(res => this.setState({featuredRecipes: res.data}))
+            .then(res => this.getThree())
+            .catch(err => console.log(err))
+    }
+
+    getThree = () => {
+        const shuffled = this.state.featuredRecipes.sort(() => 0.5 - Math.random()); 
+        let selected = shuffled.slice(0, 3);
+        this.setState({threeRecipes: selected})
+    }
     render() {
+        console.log(this.state.featuredRecipes)
         return (
         <>
         <Landing />
@@ -87,6 +112,18 @@ class Home extends Component {
                     <h4 className="popRecipeTitle">
                         Popular Recipes
                     </h4>
+                    <div>
+                        {this.state.threeRecipes.map(recipe => (
+                            <Featured
+                            key={recipe.url}
+                            name={recipe.title}
+                            link={recipe.url}
+                            image={recipe.image}
+                            time={recipe.totalTime}
+                            servings={recipe.servings}
+                            />
+                        ))}
+                    </div>
 
 
                 </div>
