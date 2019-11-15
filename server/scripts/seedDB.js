@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 const db = require('../models');
-const DevURI = require('../config/keys').mongoURI;
 
 mongoose.connect(
-    process.env.MONGODB_URI ||
-    DevURI
+    process.env.MONGODB_URI
 );
 
 const featuredRecipeSeed = [
