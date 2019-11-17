@@ -95,10 +95,12 @@ class SavedRecipes extends Component {
               .then(res => {
                   this.setState({ currentList: res.data })
               })
+              .then(res => this.getSaved(this.state.user))
               .catch(err => console.log(err))
         } else {
             API.addIngredients(info)
             .then(res => this.setState({ currentList: res.data }))
+            .then(res => this.getSaved(this.state.user))
             .catch(err => console.log(err))
         }
     }

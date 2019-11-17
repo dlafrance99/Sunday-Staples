@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Landing from "../components/Landing";
 import API from "../utils/API";
@@ -19,7 +20,7 @@ h2, h3, h4 {
     margin-top: 5px;
 }
 .welcome {
-    background-color: #9fdfbc;
+    background-color: #85BDA6;
     width: 78vw;
     margin-left: 10vw;
     padding: 1vw;
@@ -35,17 +36,18 @@ hr {
 
 .Icons {
     width: 80vw;
-    margin-left: 10vw;
+    margin-left: 14vw;
 }
 
 .iconCard {
-  height: 15vw;
-  width: 15vw;
+  height: 13vw;
+  width: 13vw;
   border-radius: 50%;
   display: inline-block;
   text-align: center;
   margin: 2%;
   padding: 2% 1% 0;
+  color: black;
 }
 
 .icon1 {
@@ -82,8 +84,8 @@ hr {
     margin-left: 1.5%;
     margin-top: 5px;
     margin-bottom: 1%;
-    color: white;
-    background-color: #108a8a;
+    color: #F6EBDA;
+    background-color: #2B2D42;
     font-size: 2rem;
     font-family: 'Playfair Display', serif;
     text-align: center;
@@ -188,26 +190,26 @@ class Home extends Component {
                     </p>
                     </div>
                     <div className="Icons">
-                        <p className="iconCard icon1">
+                        <Link to="/recipe-search"><p className="iconCard icon1">
                         <img className="icon" src="assets/images/recipe-book.png" alt="recipe icon" />
                         <br/>
                         Search Recipes
-                        </p>
-                        <p className="iconCard icon2">
+                        </p></Link> 
+                        <Link to="/nutrition-search"><p className="iconCard icon2">
                         <img className="icon" src="assets/images/plan.png" alt="list icon" />
                         <br/>
                         Search Nutrition
-                        </p>
-                        <p className="iconCard icon3">
+                        </p></Link>
+                        <Link to="/saved-recipes"><p className="iconCard icon3">
                         <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
                         <br/>
                         Save Recipes
-                        </p>
-                        <p className="iconCard icon4">
+                        </p></Link>
+                        <Link to="/shopping-list"><p className="iconCard icon4">
                         <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
                         <br/>
                         Create Shopping List
-                        </p>
+                        </p></Link>
                     </div>
                     <div className="PopRecipes">
                         <h4 className="popRecipeTitle">
