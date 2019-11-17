@@ -9,16 +9,31 @@ const NavWrapper = styled.div`
 background-color: #F1E0C5;
 color: black;
 height: 60px;
-width: 100vw;
+width: 150vw;
 text-decoration: none;
 .nav-link {
     color: #2B2D42;
-    margin-left: 10px;
     position: relative;
-    left: 55vw;
+    left: 45vw;
     top: -55px;
     font-size: 1.2rem;
     text-decoration: none;
+    border-left: solid;
+    padding-left: 38px;
+    padding-right: 38px;
+    font-weight: bold;   
+}
+.home-link {
+    color: #2B2D42;
+    margin-left: 10px;
+    position: relative;
+    left: 45vw;
+    top: -55px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    padding-right: 25px;
+    padding-left: 25px;
+    font-weight: bold;
 }
 h1 {
     margin: 0;
@@ -38,9 +53,9 @@ button{
     width: 115px;
     background-color: #F1E0C5;
     height: 3rem;
-    position: absolute;
-    top: 37px;
-    right: 31vw;
+    position: relative;
+    left: 45vw;
+    top: -60px;
     padding: 10px;
     padding-bottom: 0;
 }
@@ -54,9 +69,9 @@ button{
     width: 115px;
     background-color: #F1E0C5;
     height: 3rem;
-    position: absolute;
-    top: 37px;
-    right: 18.5vw;
+    position: relative;
+    left: 46vw;
+    top: -60px;
     padding: 10px;
     padding-bottom: 0;
 }
@@ -111,111 +126,126 @@ class Nav extends Component {
             <>
                 <NavWrapper>
                     <h1>Sunday Staples</h1>
-                    <NavLink
-                        className="nav-link"
-                        to="/home"
-                        activeClassName="active"
-                        isActive={() => window.location.pathname === "/home" || window.location.pathname === "home"}>
-                        Home
-                </NavLink>
 
-                    <span className="nav-link">|</span>
+                    <table>
+                        <tr>
+                            <th>
+                                <NavLink
+                                    to="/home"
+                                    activeClassName="active"
+                                    isActive={() => window.location.pathname === "/home" || window.location.pathname === "home"}
+                                    className="home-link"
+                                >
+                                    Home
+                                </NavLink>
+                            </th>
+                            <th>
+                                <button
+                                    onMouseEnter={this.searchDrop}
+                                    onMouseLeave={this.closeMenu}
+                                    className="nav-link search"
+                                >
+                                    Search
+                                 </button>
+                            </th>
+                            <th>
+                                <NavLink
+                                    to="/reviews"
+                                    activeClassName="active"
+                                    className="nav-link"
+                                >
+                                    Reviews
+                                 </NavLink>
+                            </th>
+                            <th>
+                                <button
+                                    onMouseEnter={this.dashDrop}
+                                    onMouseLeave={this.closeDash}
+                                    className="nav-link"
+                                >
+                                    Dashboard
+                                 </button>
+                            </th>
+                            <th>
+                                <button
+                                    style={{
+                                        width: "100px",
+                                        borderRadius: "3px",
+                                        letterSpacing: "1.5px",
+                                    }}
+                                    onClick={this.onLogoutClick}
+                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3 nav-link"
+                                >
+                                    Logout
+                                 </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
 
-                    <button
-                        className="nav-link"
-                        onMouseEnter={this.searchDrop}
-                        onMouseLeave={this.closeMenu}
-                    >
-                        Search
-                </button>
-
-                    {this.state.searchButt ? (
-                        <div className="searchDropDown"
-                            onMouseEnter={this.searchDrop}
-                            onMouseLeave={this.closeMenu}
-                        >
-                            <NavLink
-                                to="/recipe-search"
-                                activeClassName="active"
-                                className="searched"
-                            >
-                                Recipe Search
+                            </td>
+                            <td>
+                                {this.state.searchButt ? (
+                                    <div className="searchDropDown"
+                                        onMouseEnter={this.searchDrop}
+                                        onMouseLeave={this.closeMenu}
+                                    >
+                                        <NavLink
+                                            to="/recipe-search"
+                                            activeClassName="active"
+                                            className="searched"
+                                        >
+                                            Recipe Search
                              </NavLink>
 
-                            <br />
+                                        <br />
 
-                            <NavLink
-                                to="/nutrition-search"
-                                activeClassName="active"
-                                className="searched"
-                            >
-                                Nutrition Search
+                                        <NavLink
+                                            to="/nutrition-search"
+                                            activeClassName="active"
+                                            className="searched"
+                                        >
+                                            Nutrition Search
                             </NavLink>
-                        </div>
+                                    </div>
 
-                    ) : (null)}
+                                ) : (null)}
+                            </td>
+                            <td>
 
-
-                    <span className="nav-link">|</span>
-
-                    <NavLink
-                        className="nav-link"
-                        to="/reviews"
-                        activeClassName="active">
-                        Reviews
-                </NavLink>
-
-                    <span className="nav-link">|</span>
-
-                    <button
-                        className="nav-link"
-                        onMouseEnter={this.dashDrop}
-                        onMouseLeave={this.closeDash}
-                    >
-                        Dashboard
-                </button>
-
-                    {this.state.DashButt ? (
-                        <div className="DashDropDown"
-                            onMouseEnter={this.dashDrop}
-                            onMouseLeave={this.closeDash}
-                        >
-                            <NavLink
-                                to="/saved-recipes"
-                                activeClassName="active"
-                                className="Dashed"
-                            >
-                                Saved Recipes
+                            </td>
+                            <td>
+                                {this.state.DashButt ? (
+                                    <div className="DashDropDown"
+                                        onMouseEnter={this.dashDrop}
+                                        onMouseLeave={this.closeDash}
+                                    >
+                                        <NavLink
+                                            to="/saved-recipes"
+                                            activeClassName="active"
+                                            className="Dashed"
+                                        >
+                                            Saved Recipes
                              </NavLink>
 
-                            <br />
+                                        <br />
 
-                            <NavLink
-                                to="/shopping-list"
-                                activeClassName="active"
-                                className="Dashed"
-                            >
-                                Shopping List
+                                        <NavLink
+                                            to="/shopping-list"
+                                            activeClassName="active"
+                                            className="Dashed"
+                                        >
+                                            Shopping List
                             </NavLink>
-                        </div>
+                                    </div>
 
-                    ) : (null)}
+                                ) : (null)}
+                            </td>
+                            <td>
 
-                    <span className="nav-link">|</span>
-
-
-                    <button
-                        style={{
-                            width: "100px",
-                            borderRadius: "3px",
-                            letterSpacing: "1.5px",
-                            marginTop: "1rem"
-                        }}
-                        onClick={this.onLogoutClick}
-                        className="btn btn-large waves-effect waves-light hoverable blue accent-3 nav-link"
-                    >
-                        Logout
-                </button>
+                            </td>
+                        </tr>
+                    </table>
 
                 </NavWrapper>
             </>
