@@ -8,14 +8,65 @@ import styled from "styled-components";
 
 const LoginStyled = styled.div`
 text-align: center;
+
+.main{
+    font-size: 24px;
+  }
+
 .loginButt{
     background-color: transparent;
     margin-top: 22px;
     margin-left: 5%;
     border: 2px solid black;
     border-radius: 5px;
-    padding: 3px;
 }
+.loginForm {
+    width: 40vw;
+    height: 60vw;
+    float: left;
+    margin-left: 11vw;
+    background: #D2E7DE;
+    padding-top: 18%;
+  }
+
+input {
+    border: none;
+    border-bottom: solid #9BC9B6 1px;
+    background: #E8F3EE;
+    width: 26vw;
+    height: 3vw;
+}
+.goTo{
+    width: 40vw;
+    float: right;
+    margin-right: 9vw;
+    background: #EDF2F4;
+    height: 60vw;
+    padding-top: 12%;
+  }
+.icon3 {
+    background-color: #787986;
+  }
+  
+  .iconCard {
+    height: 13vw;
+    width: 13vw;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    margin-left: 33%;
+    padding: 2% 1% 0;
+    color: black;
+  }
+  
+  .icon4 {
+    background-color: #F0374D;
+  }
+  
+  .icon {
+    width: 5vw;
+    margin-top: 17%;
+  }
 `
 
 class Login extends Component {
@@ -68,24 +119,19 @@ class Login extends Component {
             <LoginStyled>
 
                 <div className="container">
-                    <div style={{ marginTop: "4rem" }} className="row">
-                        <div className="col s8 offset-s2">
-                            {/* <Link to="/" className="btn-flat waves-effect">
-                                <i className="material-icons left"></i> Back to
-                                home
-                            </Link> */}
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <h4>
-                                    <b>Login</b> below
-              </h4>
+                    <div className="row">
+                        <div className="loginForm">
+                            <div className="col s12">
+                            <p className="main"><b>Login</b> below</p>
                                 <p className="grey-text text-darken-1">
                                     Don't have an account? <Link to="/register">Register</Link>
                                 </p>
                             </div>
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div className="input-field col s12">
-                                    <label htmlFor="email">Email: </label>
+                                    <label htmlFor="email"></label>
                                     <input
+                                        placeholder="Email"
                                         onChange={this.onChange}
                                         value={this.state.email}
                                         error={errors.email}
@@ -102,8 +148,9 @@ class Login extends Component {
                                 </div>
                                 <br/>
                                 <div className="input-field col s12">
-                                    <label htmlFor="password">Password: </label>
+                                    <label htmlFor="password"></label>
                                     <input
+                                        placeholder="Password"
                                         onChange={this.onChange}
                                         value={this.state.password}
                                         error={errors.password}
@@ -118,7 +165,7 @@ class Login extends Component {
                                         {errors.passwordincorrect}
                                     </span>
                                 </div>
-                                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                                <div className="col s12">
                                     <button
                                         style={{
                                             width: "150px",
@@ -133,6 +180,21 @@ class Login extends Component {
                                     </button>
                                 </div>
                             </form>
+                        </div>
+                        <div className="goTo">
+                        <h3>Login to view</h3>
+              <div className="Icons">
+              <Link to="/saved-recipes"><p className="iconCard icon3">
+                        <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
+                        <br/>
+                        Saved Recipes
+                        </p></Link>
+                        <Link to="/shopping-list"><p className="iconCard icon4">
+                        <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
+                        <br/>
+                        Shopping List
+                        </p></Link>
+              </div>
                         </div>
                     </div>
                 </div>
