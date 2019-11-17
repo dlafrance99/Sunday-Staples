@@ -77,6 +77,8 @@ const RecipeCard = (props) => {
         }
     }
 
+
+
     return (
         <>
             <RecipeCardstyle>
@@ -89,7 +91,7 @@ const RecipeCard = (props) => {
                     <ul>
                         {props.ingredients.map((ingredient, i) => (
                             <li
-                            key={i}
+                                key={i}
                             >{ingredient}</li>
                         ))}
                     </ul>
@@ -103,6 +105,7 @@ const RecipeCard = (props) => {
                     {reviewbutton()}
 
                     {addbutton()}
+
                 </li>
             </RecipeCardstyle>
         </>

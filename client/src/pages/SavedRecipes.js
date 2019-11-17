@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 import ReviewModal from "../components/informationCards/ReviewModal"
 import { uploadFile } from 'react-s3';
+import AddedModal from "../components/informationCards/AddedModal"
 
 
 const SavedStyle = styled.div`
@@ -31,6 +32,7 @@ class SavedRecipes extends Component {
         currentList: {},
         user: this.props.auth.user.id,
         showModal: false,
+        showAdded: false,
         reviewId: {},
         comment: "",
         rating: 0,
@@ -42,7 +44,7 @@ class SavedRecipes extends Component {
         console.log(process.env.REACT_APP_SECRETKEY)
         console.log(e.target.files[0])
         uploadFile(e.target.files[0], config)
-            .then(res => this.setState({imagelink: res.location}))
+            .then(res => this.setState({ imagelink: res.location }))
             .catch(err => console.log(err))
     }
 
@@ -68,7 +70,7 @@ class SavedRecipes extends Component {
 
     getCurrent = (user) => {
         API.getCurrent(user)
-            .then(res => this.setState({ currentList: res.data}))
+            .then(res => this.setState({ currentList: res.data }))
             .catch(err => console.log(err))
     }
 
@@ -87,25 +89,35 @@ class SavedRecipes extends Component {
     showModal = () => {
         this.setState({ showModal: true })
     }
-
-    handleAdd = info => {
-    
-        if (this.state.currentList.length === 0){
-            API.createShoppingList(info)
-              .then(res => {
-                  this.setState({ currentList: res.data })
-              })
-              .catch(err => console.log(err))
-        } else {
-            API.addIngredients(info)
-            .then(res => this.setState({ currentList: res.data }))
-            .catch(err => console.log(err))
-        }
-    }
-
     closeModal = () => {
         this.setState({ showModal: false })
     }
+
+    showAdded = () => {
+        console.log(`hit this`)
+        this.setState({ showAdded: true })
+        setTimeout(() => { this.setState({ showAdded: false }) }, 2000);
+    }
+
+    handleAdd = info => {
+
+        if (this.state.currentList.length === 0) {
+            API.createShoppingList(info)
+                .then(res => {
+                    this.setState({ currentList: res.data })
+                    this.showAdded()
+                })
+                .catch(err => console.log(err))
+        } else {
+            API.addIngredients(info)
+                .then(res => {
+                    this.setState({ currentList: res.data })
+                    this.showAdded()
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
 
     saveRev = review => {
         console.log(review)
@@ -158,7 +170,7 @@ class SavedRecipes extends Component {
                                 comment={this.state.comment}
                                 upload={this.upload}
                                 rating={this.state.rating}
-                                imageLink = {this.state.imagelink}
+                                imageLink={this.state.imagelink}
                                 saveRev={() => this.saveRev({
                                     user: this.props.auth.user.id,
                                     alias: this.props.auth.user.name,
@@ -172,8 +184,13 @@ class SavedRecipes extends Component {
                             >
                             </ReviewModal>
 
+
                         </ul>
                     </div>
+                    <AddedModal
+                        added={this.state.showAdded}
+                    >
+                    </AddedModal>
                 </SavedStyle>
                 <ReviewModal
                     createReview={this.createReview}
