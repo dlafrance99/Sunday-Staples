@@ -49,7 +49,7 @@ const Reviewcard = (props) => {
                         alt="review"
                         className="revImage"
                     />
-                    <h4 className=" userName">{props.name}</h4>
+                    <h4 className=" userName">{props.getUpperCase(props.name)}</h4>
                     <h2 className=" recTitle">{props.title}</h2>
                     <a className=" revlink" href={props.link}>Recipe link</a>
                     <p className=" revRating">Rating: {props.stars}/5</p>
