@@ -118,7 +118,10 @@ class ShoppingList extends Component {
 
     completeList = (id) => {
         API.completeList(id)
-            .then(res => this.getCurrent(this.state.user))
+            .then(res => {
+                this.getCurrent(this.state.user)
+                this.getPrevious(this.state.user)
+            })
             .catch(err => console.log(err))
 
     };
