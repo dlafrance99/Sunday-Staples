@@ -8,8 +8,11 @@ import { logoutUser } from "../actions/authActions";
 
 
 const RecSearch = styled.div`
+font-family: 'Questrial', sans-serif;
+
 h1{
     margin: 0;
+    font-family: 'Playfair Display', serif;
 }
 .search-instructions{
     background-color: #EF233C;
@@ -105,10 +108,7 @@ class RecipeSearch extends Component {
                             Recipe Search
                    </h1>
                         <p>
-                            Add some variety to your meal plan for the week by searching a Sunday Staple (protein, veggie, fruit, anything that you have leftover from the past week) and find a new recipe to try out. You can save the recipe title and link by clicking the "Save!" button, and then you can come back and view saved recipes by clicking on "VIEW SAVED". It's that easy!
-                   </p>
-                        <p>
-                            To make it even easier on you, if you like a recipe and want to try it out you can click "ADD TO SHOPPING LIST" and it will transfer the ingredients to your Shopping List page.
+                            Add some variety to your meal plan for the week by searching a Sunday Staple (protein, veggie, fruit, anything that you have leftover from the past week) and find a new recipe to try out. If you create an account you can also save the recipe title and link by clicking the Save! button, and then you can come back and view saved recipes by clicking on the Dashboard link to Saved Recipes. It's that easy!
                    </p>
                     </div>
 

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Landing from "../components/Landing";
 import API from "../utils/API";
 import Featured from "../components/informationCards/Featured";
 
 const Homestyle = styled.div`
 margin: auto;
-font-family: 'Karla', sans-serif;
+font-family: 'Questrial', sans-serif;
 h2, h3, h4 {
     margin: 0;
 }
@@ -164,7 +163,6 @@ class Home extends Component {
     render() {
         return (
             <>
-                <Landing />
                 <Homestyle>
                     <div className="Home-image">
                         <img className="Home-Images" src={this.state.homeimage} />
@@ -182,7 +180,7 @@ class Home extends Component {
                         <hr />
 
                         <p>
-                            We've created a set of tools that add variety to your meal planning, provide food data to help you stay on track, and organize your shopping to save you time! Check out the Recipe Search and input one of your Sunday Staples (e.g. Chicken, Broccoli, Eggs, Oats, Bananas, etc.) to find a new recipe to try out. Utilize the Nutrition Search to find out the nutritional value of any food so that you can keep track of points, calories, carbs, fat, protein and fiber. View the Shopping List page to add items to your list or view ingredients that you added from a searched recipe. Finally, scroll through the Reviews to see what other people have loved or hated to get some ideas of what to try and what to steer clear of.
+                            We've created a set of tools that add variety to your meal planning, provide food data to help you stay on track, and organize your shopping to save you time! Check out the Recipe Search and input one of your Sunday Staples (e.g. Chicken, Broccoli, Eggs, Oats, Bananas, etc.) to find a new recipe to try out. Utilize the Nutrition Search to find out the nutritional value of any food so that you can keep track of points, calories, carbs, fat, protein and fiber. Save recipes to try later or add ingredients to your shoppinglist. View your Shopping List to add items to your list or view ingredients that you added from a searched recipe. Finally, scroll through the Reviews to see what other people have loved or hated to get some ideas of what to try and what to steer clear of.
                     </p>
 
                         <p>

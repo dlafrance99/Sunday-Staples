@@ -8,6 +8,7 @@ import { logoutUser } from "../actions/authActions";
 import List from "../components/informationCards/ShoppingList"
 
 const ShopList = styled.div`
+font-family: 'Questrial', sans-serif;
 .myShoppingList{
     background-color: #EDF2F4;
     width: 35vw;
@@ -17,8 +18,12 @@ const ShopList = styled.div`
     padding: 10px;
     float: left;
 }
-h3{
+h3,h4{
     margin: 0;
+    font-family: 'Playfair Display', serif;
+}
+h4{
+    margin-top: 1%;
 }
 hr{
     width: 90%;
@@ -50,8 +55,20 @@ hr{
     border-radius: 5px;
     padding: 3px;
 }
+.prevList{
+    list-style-type: none;
+    padding: 0;
+}
+.prevButt{
+    background-color: transparent;
+    margin-left: 5%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
 `
 const StyledLis = styled.ul`
+    
     display: ${props => props.show ? 'block' : 'none'};
 `
 
@@ -165,7 +182,7 @@ class ShoppingList extends Component {
                 handleRemove={this.handleRemove}
                 ingredients= {this.state.currentList.ingredients}
                 />
-                <h5>Item to Add:</h5>
+                <h4>Item to Add:</h4>
                 <input
                 value={this.state.added}
                 name="added"
@@ -186,10 +203,10 @@ class ShoppingList extends Component {
             <div className="pastShoppingList">
                 <h3>Past Shopping List:</h3>
                 <hr />
-                <ul>
+                <ul className="prevList">
                 {this.state.previousLists.map(list =>
                     <ListItem key={list._id} isSelected={list === this.state.selectedList}>
-                        <button onClick={() => this.setState({ selectedList: list })}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
+                        <button className="prevButt" onClick={() => this.setState({ selectedList: list })}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
                         <div className="ingredients">
                             {list.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}   
                         </div> 

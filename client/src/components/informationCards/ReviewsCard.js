@@ -2,10 +2,14 @@ import React from "react"
 import styled from "styled-components"
 
 const ReviewPage = styled.div`
+font-family: 'Questrial', sans-serif;
 .clearfix::after{
     content:"";
     clear: both;
     display: block;
+}
+h2{
+    font-family: 'Playfair Display', serif;
 }
 h4{
     margin: 0;
