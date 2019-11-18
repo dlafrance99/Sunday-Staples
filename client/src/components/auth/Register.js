@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 const RegisterStyled = styled.div`
 text-align: center;
+font-family: 'Questrial', sans-serif;
 .SignUp{
   background-color: transparent;
     margin-top: 22px;
@@ -15,22 +16,26 @@ text-align: center;
     border-radius: 5px;
     padding: 3px;
 }
+a {
+  text-decoration: none;
+}
 
 .main{
   font-size: 24px;
+  font-family: 'Playfair Display', serif;
 }
 
 .reasons{
-  width: 40vw;
+  width: 50vw;
+  height: 100vw;
   float: left;
-  margin-left: 9vw;
   background: #EDF2F4;
-  height: 60vw;
-  padding-top: 14%;
+  padding-top: 10%;
 }
 
 .icon3 {
   background-color: #787986;
+  text-decoration: none;
 }
 
 .iconCard {
@@ -39,13 +44,14 @@ text-align: center;
   border-radius: 50%;
   display: block;
   text-align: center;
-  margin-left: 33%;
+  margin-left: 17vw;
   padding: 2% 1% 0;
   color: black;
 }
 
 .icon4 {
   background-color: #F0374D;
+  text-decoration: none;
 }
 
 .icon {
@@ -54,10 +60,9 @@ text-align: center;
 }
 
 .registerForm {
-  width: 40vw;
-  height: 60vw;
+  width: 50vw;
+  height: 102vw;
   float: right;
-  margin-right: 10vw;
   background: #D2E7DE;
   padding-top: 12%;
 }
@@ -139,7 +144,7 @@ class Register extends Component {
                         </p></Link>
               </div>
             </div>
-              <div className="registerForm" style={{ paddingLeft: "11.250px" }}>
+              <div className="registerForm">
                 <p className="main"><b>Register</b> below</p>
                 <p className="grey-text text-darken-1">
                   Already have an account? <Link to="/login">Log in</Link>
@@ -208,7 +213,7 @@ class Register extends Component {
                     />
                     <span className="red-text">{errors.password2}</span>
                   </div>
-                  <div style={{ paddingLeft: "11.250px" }}>
+                  <div>
                     <button
                       style={{
                         width: "150px",

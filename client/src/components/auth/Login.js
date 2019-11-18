@@ -8,11 +8,17 @@ import styled from "styled-components";
 
 const LoginStyled = styled.div`
 text-align: center;
-
+font-family: 'Questrial', sans-serif;
 .main{
     font-size: 24px;
-  }
-
+    font-family: 'Playfair Display', serif;
+}
+h3{
+    font-family: 'Playfair Display', serif;
+}
+a {
+    text-decoration: none;
+}
 .loginButt{
     background-color: transparent;
     margin-top: 22px;
@@ -21,10 +27,9 @@ text-align: center;
     border-radius: 5px;
 }
 .loginForm {
-    width: 40vw;
-    height: 60vw;
+    width: 50vw;
+    height: 100vw;
     float: left;
-    margin-left: 11vw;
     background: #D2E7DE;
     padding-top: 18%;
   }
@@ -37,11 +42,10 @@ input {
     height: 3vw;
 }
 .goTo{
-    width: 40vw;
+    width: 50vw;
+    height: 100vw;
     float: right;
-    margin-right: 9vw;
     background: #EDF2F4;
-    height: 60vw;
     padding-top: 12%;
   }
 .icon3 {
@@ -54,7 +58,7 @@ input {
     border-radius: 50%;
     display: block;
     text-align: center;
-    margin-left: 33%;
+    margin-left: 20vw;
     padding: 2% 1% 0;
     color: black;
   }
@@ -66,6 +70,9 @@ input {
   .icon {
     width: 5vw;
     margin-top: 17%;
+  }
+  h3{
+      margin-left: 3vw;
   }
 `
 
@@ -122,7 +129,7 @@ class Login extends Component {
                     <div className="row">
                         <div className="loginForm">
                             <div className="col s12">
-                            <p className="main"><b>Login</b> below</p>
+                            <p className="main"><b>Log in</b> below</p>
                                 <p className="grey-text text-darken-1">
                                     Don't have an account? <Link to="/register">Register</Link>
                                 </p>
@@ -176,13 +183,13 @@ class Login extends Component {
                                         type="submit"
                                         className="btn btn-large waves-effect waves-light hoverable blue accent-3 loginButt"
                                     >
-                                        Login
+                                        Log in
                                     </button>
                                 </div>
                             </form>
                         </div>
                         <div className="goTo">
-                        <h3>Login to view</h3>
+                        <h3>Log in to view</h3>
               <div className="Icons">
               <Link to="/saved-recipes"><p className="iconCard icon3">
                         <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />

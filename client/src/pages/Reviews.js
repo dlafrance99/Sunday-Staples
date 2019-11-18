@@ -5,7 +5,6 @@ import Reviewcard from "../components/informationCards/ReviewsCard"
 
 const Reviewstyle = styled.div`
 background-color: #EDF2F4;
-
 `
 
 
