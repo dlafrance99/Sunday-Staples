@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"
 
 const RecipeCardstyle = styled.div`
+font-family: 'Questrial', sans-serif;
 width: 38%;
 height: 950px;
 background-color: #EDF2F4;
@@ -14,6 +15,9 @@ padding-bottom: 10px;
 float: left;
 margin-left: 5%;
 margin-bottom: 10px;
+h3, h4{
+    font-family: 'Playfair Display', serif;
+}
 img{
     height: 200px;
     width: 200px;
@@ -32,6 +36,14 @@ img{
 .revButt{
     background-color: transparent;
     margin-top: 22px;
+    margin-left: 5%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 3px;
+}
+.addButt{
+    float: right;
+    background-color: transparent;
     margin-left: 5%;
     border: 2px solid black;
     border-radius: 5px;
@@ -69,7 +81,7 @@ const RecipeCard = (props) => {
             return (
                 <button
                     onClick={props.handleAdd}
-                    className="revButt"
+                    className="addButt"
                 >
                     Add to Shopping List
                 </button>
@@ -83,9 +95,9 @@ const RecipeCard = (props) => {
         <>
             <RecipeCardstyle>
                 <li className="cardlist">
-                    <h3>{props.name}</h3>
+                    <h3>{props.name}</h3>{addbutton()}
                     <a href={props.link} rel="noopener noreferrer" target="_blank">Link to Recipe</a>
-                    <h4>Time: {props.time} Servings: {props.servings}</h4>
+                    <h4>Time: {props.time} | Servings: {props.servings}</h4>
                     <img src={props.image} alt="recipe"></img>
                     <h4>Ingredients: </h4>
                     <ul>
@@ -104,7 +116,7 @@ const RecipeCard = (props) => {
 
                     {reviewbutton()}
 
-                    {addbutton()}
+                    
 
                 </li>
             </RecipeCardstyle>

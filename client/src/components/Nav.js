@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import styled from "styled-components"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
 
 const NavWrapper = styled.div`
+font-family: 'Playfair Display', serif;
 background-color: #F1E0C5;
 color: black;
 height: 60px;
@@ -50,7 +51,7 @@ button{
     outline: none;
 }
 .searchDropDown{
-    width: 115px;
+    width: 125px;
     background-color: #F1E0C5;
     height: 3rem;
     position: relative;
@@ -60,10 +61,16 @@ button{
     padding-bottom: 0;
 }
 .searched{
+    width: 100vw;
     color: #2B2D42;
     margin-right:5px;
     text-decoration: none;
 
+}
+table {
+    margin-top: 1vw;
+    margin-left: 6vw;
+}
 }
 .DashDropDown{
     width: 115px;
@@ -79,7 +86,26 @@ button{
     color: #2B2D42;
     margin-right:5px;
     text-decoration: none;
-
+    margin-bottom:3%;
+}
+.loginDropDown{
+    width: 115px;
+    background-color: #F1E0C5;
+    height: 6rem;
+    position: relative;
+    left: 46vw;
+    top: -60px;
+    padding: 10px;
+}
+.Log{
+    color: #2B2D42;
+    margin-right:5px;
+    text-decoration: none;
+    margin:3%;
+    padding: 3%;
+}
+.Log:hover, .Dashed:hover, .searched:hover {
+    background: #F6EBDA;
 }
 `
 // I think we should make our nav bar with dropdowns so that Search can include Recipe and Nutrition, Profile could include Login, Register, Saved Recipes and Shopping list and Reviews
@@ -89,7 +115,8 @@ button{
 class Nav extends Component {
     state = {
         searchButt: false,
-        DashButt: false
+        DashButt: false,
+        loginButt: false
     }
 
     onLogoutClick = e => {
@@ -119,6 +146,18 @@ class Nav extends Component {
         event.preventDefault();
 
         this.setState({ DashButt: false })
+    }
+
+    loginDrop = (event) => {
+        event.preventDefault()
+
+        this.setState({ loginButt: true })
+    }
+
+    closeLogin = (event) => {
+        event.preventDefault();
+
+        this.setState({ loginButt: false })
     }
 
     render() {
@@ -168,15 +207,11 @@ class Nav extends Component {
                             </th>
                             <th>
                                 <button
-                                    style={{
-                                        width: "100px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                    }}
-                                    onClick={this.onLogoutClick}
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3 nav-link"
+                                    onMouseEnter={this.loginDrop}
+                                    onMouseLeave={this.closeLogin}
+                                    className="nav-link"
                                 >
-                                    Logout
+                                    Log in
                                  </button>
                             </th>
                         </tr>
@@ -196,17 +231,15 @@ class Nav extends Component {
                                             className="searched"
                                         >
                                             Recipe Search
-                             </NavLink>
-
+                                        </NavLink>
                                         <br />
-
                                         <NavLink
                                             to="/nutrition-search"
                                             activeClassName="active"
                                             className="searched"
                                         >
                                             Nutrition Search
-                            </NavLink>
+                                         </NavLink>
                                     </div>
 
                                 ) : (null)}
@@ -226,24 +259,53 @@ class Nav extends Component {
                                             className="Dashed"
                                         >
                                             Saved Recipes
-                             </NavLink>
-
+                                        </NavLink>
                                         <br />
-
                                         <NavLink
                                             to="/shopping-list"
                                             activeClassName="active"
                                             className="Dashed"
                                         >
                                             Shopping List
-                            </NavLink>
+                                        </NavLink>
                                     </div>
 
                                 ) : (null)}
                             </td>
                             <td>
+                                {this.state.loginButt ? (
+                                    <div className="loginDropDown"
+                                        onMouseEnter={this.loginDrop}
+                                        onMouseLeave={this.closeLogin}
+                                    >
+                                        <NavLink
+                                            to="/login"
+                                            activeClassName="active"
+                                            className="Log"
+                                        >
+                                            Log in
+                                        </NavLink>
+                                        <br />
+                                        <NavLink
+                                            to="/register"
+                                            activeClassName="active"
+                                            className="Log"
+                                        >
+                                            Register
+                                        </NavLink>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <Link to="/login"
+                                            onClick={this.onLogoutClick}
+                                            className="Log">
+                                            Logout
+                                        </Link>
+                                    </div>
 
+                                ) : (null)}
                             </td>
+
                         </tr>
                     </table>
 

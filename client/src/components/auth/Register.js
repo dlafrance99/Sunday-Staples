@@ -8,14 +8,73 @@ import styled from "styled-components";
 
 const RegisterStyled = styled.div`
 text-align: center;
+font-family: 'Questrial', sans-serif;
 .SignUp{
   background-color: transparent;
     margin-top: 22px;
-    margin-left: 5%;
     border: 2px solid black;
     border-radius: 5px;
     padding: 3px;
 }
+a {
+  text-decoration: none;
+}
+
+.main{
+  font-size: 24px;
+  font-family: 'Playfair Display', serif;
+}
+
+.reasons{
+  width: 50vw;
+  height: 100vw;
+  float: left;
+  background: #EDF2F4;
+  padding-top: 10%;
+}
+
+.icon3 {
+  background-color: #787986;
+  text-decoration: none;
+}
+
+.iconCard {
+  height: 13vw;
+  width: 13vw;
+  border-radius: 50%;
+  display: block;
+  text-align: center;
+  margin-left: 17vw;
+  padding: 2% 1% 0;
+  color: black;
+}
+
+.icon4 {
+  background-color: #F0374D;
+  text-decoration: none;
+}
+
+.icon {
+  width: 5vw;
+  margin-top: 17%;
+}
+
+.registerForm {
+  width: 50vw;
+  height: 102vw;
+  float: right;
+  background: #D2E7DE;
+  padding-top: 12%;
+}
+
+input {
+  border: none;
+  border-bottom: solid #9BC9B6 1px;
+  background: #E8F3EE;
+  width: 26vw;
+  height: 3vw;
+}
+
 `
 
 class Register extends Component {
@@ -70,97 +129,108 @@ class Register extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col s8 offset-s2">
-              {/* <Link to="/" className="btn-flat waves-effect">
-                <i className="material-icons left"></i> Back to
-                home
-            </Link> */}
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <h4>
-                  <b>Register</b> below
-              </h4>
+            <div className="reasons">
+              <h3>Creating an account gives you the ability to</h3>
+              <div className="Icons">
+              <Link to="/saved-recipes"><p className="iconCard icon3">
+                        <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
+                        <br/>
+                        Save Recipes
+                        </p></Link>
+                        <Link to="/shopping-list"><p className="iconCard icon4">
+                        <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
+                        <br/>
+                        Create Shopping List
+                        </p></Link>
+              </div>
+            </div>
+              <div className="registerForm">
+                <p className="main"><b>Register</b> below</p>
                 <p className="grey-text text-darken-1">
                   Already have an account? <Link to="/login">Log in</Link>
                 </p>
+                <form noValidate onSubmit={this.onSubmit}>
+                  <div className="input-field">
+                    <label htmlFor="name"></label>
+                    <input
+                      placeholder="Name"
+                      onChange={this.onChange}
+                      value={this.state.name}
+                      error={errors.name}
+                      id="name"
+                      type="text"
+                      className={classnames("", {
+                        invalid: errors.name
+                      })}
+                    />
+                    <span className="red-text">{errors.name}</span>
+                  </div>
+                  <br/>
+                  <div className="input-field">
+                    <label htmlFor="email"></label>
+                    <input
+                      placeholder="Email"
+                      onChange={this.onChange}
+                      value={this.state.email}
+                      error={errors.email}
+                      id="email"
+                      type="email"
+                      className={classnames("", {
+                        invalid: errors.email
+                      })}
+                    />
+                    <span className="red-text">{errors.email}</span>
+                  </div>
+                  <br/>
+                  <div className="input-field">
+                    <label htmlFor="password"></label>
+                    <input
+                      placeholder="Password"
+                      onChange={this.onChange}
+                      value={this.state.password}
+                      error={errors.password}
+                      id="password"
+                      type="password"
+                      className={classnames("", {
+                        invalid: errors.password
+                      })}
+                    />
+                    <span className="red-text">{errors.password}</span>
+                  </div>
+                  <br/>
+                  <div className="input-field">
+                    <label htmlFor="password2"></label>
+                    <input
+                      placeholder="Confirm Password"
+                      onChange={this.onChange}
+                      value={this.state.password2}
+                      error={errors.password2}
+                      id="password2"
+                      type="password"
+                      className={classnames("", {
+                        invalid: errors.password2
+                      })}
+                    />
+                    <span className="red-text">{errors.password2}</span>
+                  </div>
+                  <div>
+                    <button
+                      style={{
+                        width: "150px",
+                        borderRadius: "3px",
+                        letterSpacing: "1.5px",
+                        marginTop: "1rem"
+                      }}
+                      type="submit"
+                      className="btn btn-large waves-effect waves-light hoverable blue accent-3 SignUp"
+                    >
+                      Sign up
+                  </button>
+                  </div>
+                </form>
               </div>
-              <form noValidate onSubmit={this.onSubmit}>
-                <div className="input-field col s12">
-                  <label htmlFor="name">Name: </label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.name}
-                    error={errors.name}
-                    id="name"
-                    type="text"
-                    className={classnames("", {
-                      invalid: errors.name
-                    })}
-                  />
-                  <span className="red-text">{errors.name}</span>
-                </div>
-                <br/>
-                <div className="input-field col s12">
-                  <label htmlFor="email">Email: </label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    error={errors.email}
-                    id="email"
-                    type="email"
-                    className={classnames("", {
-                      invalid: errors.email
-                    })}
-                  />
-                  <span className="red-text">{errors.email}</span>
-                </div>
-                <br/>
-                <div className="input-field col s12">
-                  <label htmlFor="password">Password: </label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    error={errors.password}
-                    id="password"
-                    type="password"
-                    className={classnames("", {
-                      invalid: errors.password
-                    })}
-                  />
-                  <span className="red-text">{errors.password}</span>
-                </div>
-                <br/>
-                <div className="input-field col s12">
-                  <label htmlFor="password2">Confirm Password: </label>
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password2}
-                    error={errors.password2}
-                    id="password2"
-                    type="password"
-                    className={classnames("", {
-                      invalid: errors.password2
-                    })}
-                  />
-                  <span className="red-text">{errors.password2}</span>
-                </div>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                  <button
-                    style={{
-                      width: "150px",
-                      borderRadius: "3px",
-                      letterSpacing: "1.5px",
-                      marginTop: "1rem"
-                    }}
-                    type="submit"
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3 SignUp"
-                  >
-                    Sign up
-                </button>
-                </div>
-              </form>
             </div>
           </div>
-        </div>
       </RegisterStyled>
     );
   }

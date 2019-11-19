@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components"
 
 const ModalStyle = styled.div`
+font-family: 'Questrial', sans-serif;
 .modal {
     position: fixed;
     top: 0;
@@ -69,6 +70,9 @@ const ModalStyle = styled.div`
     padding: 3px;
     width: 450px;
     height: 100px;
+}
+h1, h2 {
+    font-family: 'Playfair Display', serif;
 }
 `
 

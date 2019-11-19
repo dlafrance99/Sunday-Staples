@@ -106,6 +106,7 @@ class SavedRecipes extends Component {
                 .then(res => {
                     this.setState({ currentList: res.data })
                     this.showAdded()
+                    this.getCurrent(this.state.user)
                 })
                 .catch(err => console.log(err))
         } else {
@@ -113,6 +114,7 @@ class SavedRecipes extends Component {
                 .then(res => {
                     this.setState({ currentList: res.data })
                     this.showAdded()
+                    this.getCurrent(this.state.user)
                 })
                 .catch(err => console.log(err))
         }

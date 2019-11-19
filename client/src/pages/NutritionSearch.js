@@ -4,8 +4,11 @@ import API from "../utils/API"
 import NutritionCard from "../components/informationCards/NutritionCard"
 
 const NutSearch = styled.div`
+font-family: 'Questrial', sans-serif;
 h1{
     margin: 0;
+    font-family: 'Playfair Display', serif;
+}
 }
 .search-instructions{
     background-color: #EF233C;

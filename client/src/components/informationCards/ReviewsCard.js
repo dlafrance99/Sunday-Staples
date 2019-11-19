@@ -2,10 +2,14 @@ import React from "react"
 import styled from "styled-components"
 
 const ReviewPage = styled.div`
+font-family: 'Questrial', sans-serif;
 .clearfix::after{
     content:"";
     clear: both;
     display: block;
+}
+h2{
+    font-family: 'Playfair Display', serif;
 }
 h4{
     margin: 0;
@@ -45,7 +49,7 @@ const Reviewcard = (props) => {
                         alt="review"
                         className="revImage"
                     />
-                    <h4 className=" userName">{props.name}</h4>
+                    <h4 className=" userName">{props.getUpperCase(props.name)}</h4>
                     <h2 className=" recTitle">{props.title}</h2>
                     <a className=" revlink" href={props.link}>Recipe link</a>
                     <p className=" revRating">Rating: {props.stars}/5</p>
