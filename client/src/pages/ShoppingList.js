@@ -11,9 +11,8 @@ const ShopList = styled.div`
 font-family: 'Questrial', sans-serif;
 .myShoppingList{
     background-color: #EDF2F4;
-    width: 35vw;
-    margin-left: 10vw;
-    margin-top: 20px;
+    margin-top: 5%;
+    margin-left: 2%;
     border: 5px solid;
     padding: 10px;
     float: left;
@@ -30,10 +29,8 @@ hr{
     border-color: black;
 }
 .pastShoppingList{
-    float: left;
-    width: 35vw;
-    margin-left: 10vw;
-    margin-top: 20px;
+    margin-left: 4%;
+    margin-top: 5%;
     border: 5px solid;
     padding: 10px;
     background-color: #b3e6ca;
@@ -176,47 +173,51 @@ class ShoppingList extends Component {
     return (
         <>
         <ShopList>
-            <div className="myShoppingList">
-                <h3>My Shopping List:</h3>
-                <button className="clearButt" onClick={() => this.clearList(this.state.currentList.id)}>Clear Shopping List</button>
-                <hr />
-                <List
-                id={this.state.currentList.id}
-                handleRemove={this.handleRemove}
-                ingredients= {this.state.currentList.ingredients}
-                />
-                <h4>Item to Add:</h4>
-                <input
-                value={this.state.added}
-                name="added"
-                onChange={this.handleInputChange}
-                type="text"
-                placeholder="Apples"
-                ></input>
-                <button className="ingredientButtons" onClick={this.handleFormSubmit} >Add Item</button>
-                <br />
-                <button 
-                className="ingredientButtons"
-                onClick={() => this.completeList(this.state.currentList.id)}
-                >
-                    Done
-                </button>
-            </div>
+            <div className="container">
+                <div className="row">
+                <div className="myShoppingList col-6">
+                    <h3>My Shopping List:</h3>
+                    <button className="clearButt" onClick={() => this.clearList(this.state.currentList.id)}>Clear Shopping List</button>
+                    <hr />
+                    <List
+                    id={this.state.currentList.id}
+                    handleRemove={this.handleRemove}
+                    ingredients= {this.state.currentList.ingredients}
+                    />
+                    <h4>Item to Add:</h4>
+                    <input
+                    value={this.state.added}
+                    name="added"
+                    onChange={this.handleInputChange}
+                    type="text"
+                    placeholder="Apples"
+                    ></input>
+                    <button className="ingredientButtons" onClick={this.handleFormSubmit} >Add Item</button>
+                    <br />
+                    <button 
+                    className="ingredientButtons"
+                    onClick={() => this.completeList(this.state.currentList.id)}
+                    >
+                        Done
+                    </button>
+                </div>
 
-            <div className="pastShoppingList">
-                <h3>Past Shopping List:</h3>
-                <hr />
-                <ul className="prevList">
-                {this.state.previousLists.map(list =>
-                    <ListItem key={list._id} isSelected={list === this.state.selectedList}>
-                        <button className="prevButt" onClick={() => this.setState({ selectedList: list })}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
-                        <div className="ingredients">
-                            {list.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}   
-                        </div> 
-                    </ListItem>
-                    
-                    )}
-                    </ul>
+                <div className="pastShoppingList col-5">
+                    <h3>Past Shopping List:</h3>
+                    <hr />
+                    <ul className="prevList">
+                    {this.state.previousLists.map(list =>
+                        <ListItem key={list._id} isSelected={list === this.state.selectedList}>
+                            <button className="prevButt" onClick={() => this.setState({ selectedList: list })}>{dateFormat(list.date, "mm/dd/yyyy")}</button> 
+                            <div className="ingredients">
+                                {list.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>)}   
+                            </div> 
+                        </ListItem>
+                        
+                        )}
+                        </ul>
+                </div>
+                </div>
             </div>
         </ShopList>
         </>

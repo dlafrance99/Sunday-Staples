@@ -2,19 +2,21 @@ import React from "react";
 import styled from "styled-components"
 
 const RecipeCardstyle = styled.div`
-font-family: 'Questrial', sans-serif;
-width: 38%;
-height: 950px;
+font-family: 'Questrial',sans-serif;
+width: 45%;
 background-color: #EDF2F4;
 border: 5px solid;
 border-radius: 5px;
 border-color: #2B2D42;
-padding-left: 2vw;
-padding-right: 2vw;
-padding-bottom: 10px;
+padding-left: 2%;
+padding-right: 2%;
+padding-bottom: 1%;
 float: left;
-margin-left: 5%;
-margin-bottom: 10px;
+margin-left: 2%;
+margin-bottom: 2%;
+.col-6 {
+    max-width: 100%;
+}
 h3, h4{
     font-family: 'Playfair Display', serif;
 }
@@ -94,7 +96,7 @@ const RecipeCard = (props) => {
     return (
         <>
             <RecipeCardstyle>
-                <li className="cardlist">
+                <li className="cardlist col-6">
                     <h3>{props.name}</h3>{addbutton()}
                     <a href={props.link} rel="noopener noreferrer" target="_blank">Link to Recipe</a>
                     <h4>Time: {props.time} | Servings: {props.servings}</h4>

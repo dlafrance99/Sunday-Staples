@@ -4,6 +4,7 @@ import styled from "styled-components"
 const NutCardstyle = styled.div`
 .nutList{
     list-style-type: none;
+    padding-inline-start: 10%;
 }
 `
 
@@ -11,10 +12,10 @@ const NutritionCard = (props) => {
     return (
         <>
             <tr>
-                <td>{props.quantity}</td>
-                <td>grams</td>
-                <td>{props.food}</td>
-                <td>{((props.quantity / 100) * props.energy).toFixed(2)} kCal</td>
+                <td style={{ padding: '2%' }}>{props.quantity}</td>
+                <td style={{ padding: '2%' }}>grams</td>
+                <td style={{ padding: '2%' }}>{props.food}</td>
+                <td style={{ padding: '2%' }}>{((props.quantity / 100) * props.energy).toFixed(2)} kCal</td>
                 <td>
                     <NutCardstyle>
                     <ul className="nutList">

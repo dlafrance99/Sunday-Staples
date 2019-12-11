@@ -27,11 +27,10 @@ a {
     border-radius: 5px;
 }
 .loginForm {
-    width: 50vw;
-    height: 100vw;
     float: left;
     background: #D2E7DE;
     padding-top: 18%;
+    height: 100%;
   }
 
 input {
@@ -42,37 +41,37 @@ input {
     height: 3vw;
 }
 .goTo{
-    width: 50vw;
-    height: 100vw;
     float: right;
     background: #EDF2F4;
     padding-top: 12%;
+    height: 100%;
   }
 .icon3 {
     background-color: #787986;
   }
   
-  .iconCard {
-    height: 13vw;
-    width: 13vw;
+.iconCard {
+    height: 14rem;
+    width: 95%;
     border-radius: 50%;
-    display: block;
+    display: inline-block;
     text-align: center;
-    margin-left: 20vw;
-    padding: 2% 1% 0;
+    margin: 6% 2.4% 0;
+    padding: 11% 9% 0;
     color: black;
-  }
+}
   
-  .icon4 {
+.icon4 {
     background-color: #F0374D;
   }
   
-  .icon {
-    width: 5vw;
-    margin-top: 17%;
-  }
-  h3{
-      margin-left: 3vw;
+.icon {
+    width: 5rem;
+    margin-top: 18%;
+}
+}
+  .section{
+      height: 100vh;
   }
 `
 
@@ -124,18 +123,17 @@ class Login extends Component {
 
         return (
             <LoginStyled>
-
                 <div className="container">
-                    <div className="row">
-                        <div className="loginForm">
-                            <div className="col s12">
+                    <div className="row section">
+                        <div className="loginForm col-6">
+                            <div>
                             <p className="main"><b>Log in</b> below</p>
                                 <p className="grey-text text-darken-1">
                                     Don't have an account? <Link to="/register">Register</Link>
                                 </p>
                             </div>
                             <form noValidate onSubmit={this.onSubmit}>
-                                <div className="input-field col s12">
+                                <div className="input-field">
                                     <label htmlFor="email"></label>
                                     <input
                                         placeholder="Email"
@@ -154,7 +152,7 @@ class Login extends Component {
                                     </span>
                                 </div>
                                 <br/>
-                                <div className="input-field col s12">
+                                <div className="input-field">
                                     <label htmlFor="password"></label>
                                     <input
                                         placeholder="Password"
@@ -172,7 +170,7 @@ class Login extends Component {
                                         {errors.passwordincorrect}
                                     </span>
                                 </div>
-                                <div className="col s12">
+                                <div>
                                     <button
                                         style={{
                                             width: "150px",
@@ -188,20 +186,26 @@ class Login extends Component {
                                 </div>
                             </form>
                         </div>
-                        <div className="goTo">
-                        <h3>Log in to view</h3>
-              <div className="Icons">
-              <Link to="/saved-recipes"><p className="iconCard icon3">
-                        <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
-                        <br/>
-                        Saved Recipes
-                        </p></Link>
-                        <Link to="/shopping-list"><p className="iconCard icon4">
-                        <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
-                        <br/>
-                        Shopping List
-                        </p></Link>
-              </div>
+                        <div className="goTo col-6">
+                            <div className="row">
+                            <h3 className="col-12">Log in to view</h3>
+                            </div>
+                            <div className="Icons row">
+                            <div className="col-6">
+                            <Link to="/saved-recipes"><p className="iconCard icon3">
+                                <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
+                                <br/>
+                                Saved Recipes
+                            </p></Link>
+                            </div>
+                            <div className="col-6">
+                            <Link to="/shopping-list"><p className="iconCard icon4">
+                                <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
+                                <br/>
+                                Shopping List
+                            </p></Link>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
