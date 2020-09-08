@@ -12,15 +12,12 @@ h1{
 }
 .search-instructions{
     background-color: #EF233C;
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 10px;
     padding: 10px;
+    margin-top: 1%;
 }
 .searchDiv{
     background-color: #EDF2F4;
-    width: 80vw;
-    margin-left: 10vw;
+
     padding: 10px;
     text-align: center;
 }
@@ -32,19 +29,13 @@ h1{
 .searchButton{
     border-radius: 5px;
 }
-.NutritionalTable{
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 10px;
-}
 .nut-table{
     width: 100%;
-
 }
 .tablehead{
-    margin: 10px;
+    margin: 2%
+    padding: 2%;
 }
-
 `
 
 class NutritionSearch extends Component {
@@ -76,6 +67,9 @@ class NutritionSearch extends Component {
         return (
             <>
                 <NutSearch>
+                <div className="container">
+                    <div className="row">
+                    <section className="col-12">
                     <div className="search-instructions">
                         <h1>
                             Nutrition Search
@@ -109,9 +103,10 @@ class NutritionSearch extends Component {
                             Search
                          </button>
                     </div>
-
-                    <div className="NutritionalTable">
-                        <table className="nut-table">
+                    </section>
+                    </div>
+                    <div className="NutritionalTable row">
+                        <table className="nut-table col-12">
                             <tr>
                                 <th className="tablehead">Quantity</th>
                                 <th className="tablehead">Units</th>
@@ -137,6 +132,7 @@ class NutritionSearch extends Component {
 
                             </tbody>
                         </table>
+                    </div>
                     </div>
                 </NutSearch>
             </>

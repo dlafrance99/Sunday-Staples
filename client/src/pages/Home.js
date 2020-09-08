@@ -10,20 +10,22 @@ font-family: 'Questrial', sans-serif;
 h2, h3, h4 {
     margin: 0;
 }
-
+h2 {
+    font-weight: 900;
+}
+h5 {
+    margin-top: 3%;
+}
 .Home-image {
     background-color: white;
     height: 250px;
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 5px;
+    margin-top: 1%;
+    padding: 0;
 }
 .welcome {
     background-color: #85BDA6;
-    width: 78vw;
-    margin-left: 10vw;
-    padding: 1vw;
-    margin-top: 5px;
+    margin-top: 1%;
+    padding: 0;
 }
 hr {
     border-width: 2px;
@@ -32,21 +34,18 @@ hr {
 .title-text {
     font-family: 'Playfair Display', serif;
 }
-
 .Icons {
-    width: 80vw;
-    margin-left: 14vw;
+    height: 18rem;
 }
-
 .iconCard {
-  height: 13vw;
-  width: 13vw;
-  border-radius: 50%;
-  display: inline-block;
-  text-align: center;
-  margin: 2%;
-  padding: 2% 1% 0;
-  color: black;
+    height: 90%;
+    width: 100%;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin: 6% 2.4% 0;
+    padding: 10% 13% 0;
+    color: black;
 }
 
 .icon1 {
@@ -66,33 +65,28 @@ hr {
 }
 
 .icon {
-    width: 5vw;
-    margin-top: 17%;
+    width: 6rem;
+    margin-top: 22%;
 }
 
 .PopRecipes {
-    width: 80vw;
-    height: 410px;
-    margin-left: 10vw;
-    margin-top: 5px;
+    height: 30rem;
     border: 2px solid;
 }
 
 .popRecipeTitle {
-    width: 95%;
-    margin-left: 1.5%;
-    margin-top: 5px;
-    margin-bottom: 1%;
+    margin: 1%;
     color: #F6EBDA;
     background-color: #2B2D42;
     font-size: 2rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Playfair Display',serif;
     text-align: center;
     padding: 1%;
 }
 .Home-Images{
     height: 250px;
-    width: 80vw;
+    width: 100%;
+    padding: 0;
 }
 `
 
@@ -164,11 +158,14 @@ class Home extends Component {
         return (
             <>
                 <Homestyle>
-                    <div className="Home-image">
+                <div  className="container">
+                    <div className="row">
+                    <div className="Home-image col-12">
                         <img className="Home-Images" src={this.state.homeimage} />
                     </div>
-
-                    <div className="welcome">
+                    </div>
+                    <div className="welcome row">
+                        <div className="col-12">
                         <h2 className="title-text">
                             Welcome to Sunday Staples
                     </h2>
@@ -187,47 +184,57 @@ class Home extends Component {
                             Food should bring joy, not frustration. Using our tools will certainly make Sunday meal planning easier and more convenient. Think of all the time you'll save and the inspiration that will spark! Be sure to take pictures of your creations and tag #SundayStaples so we can see what you make!
                     </p>
                     </div>
-                    <div className="Icons">
+                    </div>
+                    <div className="Icons row">
+                        <div className="col-3">
                         <Link to="/recipe-search"><p className="iconCard icon1">
                         <img className="icon" src="assets/images/recipe-book.png" alt="recipe icon" />
                         <br/>
-                        Search Recipes
+                        <h5>Search Recipes</h5>
                         </p></Link> 
+                        </div>
+                        <div className="col-3">
                         <Link to="/nutrition-search"><p className="iconCard icon2">
                         <img className="icon" src="assets/images/plan.png" alt="list icon" />
                         <br/>
-                        Search Nutrition
+                        <h5>Search Nutrition</h5>
                         </p></Link>
+                        </div>
+                        <div className="col-3">
                         <Link to="/saved-recipes"><p className="iconCard icon3">
                         <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
                         <br/>
-                        Save Recipes
+                        <h5>Save Recipes</h5>
                         </p></Link>
+                        </div>
+                        <div className="col-3">
                         <Link to="/shopping-list"><p className="iconCard icon4">
                         <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
                         <br/>
-                        Create Shopping List
+                        <h5>Create Shopping List</h5>
                         </p></Link>
+                        </div>
                     </div>
-                    <div className="PopRecipes">
-                        <h4 className="popRecipeTitle">
-                            Popular Recipes
-                    </h4>
-                    <div>
-                        {this.state.threeRecipes.map(recipe => (
-                            <Featured
-                            key={recipe.url}
-                            name={recipe.title}
-                            link={recipe.url}
-                            image={recipe.image}
-                            time={recipe.totalTime}
-                            servings={recipe.servings}
-                            />
-                        ))}
+                    <div className="PopRecipes row">
+                        <div className="col-12">
+                            <h4 className="popRecipeTitle">
+                                Popular Recipes
+                        </h4>
+                        <div className="row">
+                            {this.state.threeRecipes.map(recipe => (
+                                <Featured
+                                key={recipe.url}
+                                name={recipe.title}
+                                link={recipe.url}
+                                image={recipe.image}
+                                time={recipe.totalTime}
+                                servings={recipe.servings}
+                                />
+                            ))}
+                        </div>
+                        </div>
                     </div>
-
-
-                    </div>
+                </div>
                 </Homestyle>
             </>
         )
