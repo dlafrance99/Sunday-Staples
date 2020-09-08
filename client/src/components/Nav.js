@@ -7,111 +7,10 @@ import { logoutUser } from "../actions/authActions";
 
 const NavWrapper = styled.div`
 font-family: 'Playfair Display', serif;
-background-color: #F1E0C5;
 color: black;
 height: 60px;
-width: 150vw;
 text-decoration: none;
-.nav-link {
-    color: #2B2D42;
-    position: relative;
-    left: 45vw;
-    top: -55px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    border-left: solid;
-    padding-left: 38px;
-    padding-right: 38px;
-    font-weight: bold;   
-}
-.home-link {
-    color: #2B2D42;
-    margin-left: 10px;
-    position: relative;
-    left: 45vw;
-    top: -55px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    padding-right: 25px;
-    padding-left: 25px;
-    font-weight: bold;
-}
-h1 {
-    margin: 0;
-    color: #2B2D42;
-    padding: 10px;
-    margin-left: 5vw;
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1rem;
-    font-size: 36;
-}
-button{
-    background-color: transparent;
-    border: none;
-    outline: none;
-}
-.searchDropDown{
-    width: 125px;
-    background-color: #F1E0C5;
-    height: 3rem;
-    position: relative;
-    left: 45vw;
-    top: -60px;
-    padding: 10px;
-    padding-bottom: 0;
-}
-.searched{
-    width: 100vw;
-    color: #2B2D42;
-    margin-right:5px;
-    text-decoration: none;
-
-}
-table {
-    margin-top: 1vw;
-    margin-left: 6vw;
-}
-}
-.DashDropDown{
-    width: 115px;
-    background-color: #F1E0C5;
-    height: 3rem;
-    position: relative;
-    left: 46vw;
-    top: -60px;
-    padding: 10px;
-    padding-bottom: 0;
-}
-.Dashed{
-    color: #2B2D42;
-    margin-right:5px;
-    text-decoration: none;
-    margin-bottom:3%;
-}
-.loginDropDown{
-    width: 115px;
-    background-color: #F1E0C5;
-    height: 6rem;
-    position: relative;
-    left: 46vw;
-    top: -60px;
-    padding: 10px;
-}
-.Log{
-    color: #2B2D42;
-    margin-right:5px;
-    text-decoration: none;
-    margin:3%;
-    padding: 3%;
-}
-.Log:hover, .Dashed:hover, .searched:hover {
-    background: #F6EBDA;
-}
 `
-// I think we should make our nav bar with dropdowns so that Search can include Recipe and Nutrition, Profile could include Login, Register, Saved Recipes and Shopping list and Reviews
-// ex. Sunday Staples                   Home | Search | Profile | Reviews
-
-
 class Nav extends Component {
     state = {
         searchButt: false,
@@ -124,191 +23,105 @@ class Nav extends Component {
         this.props.logoutUser();
     };
 
-    searchDrop = (event) => {
-        event.preventDefault()
-
-        this.setState({ searchButt: true })
-    }
-
-    closeMenu = (event) => {
-        event.preventDefault();
-
-        this.setState({ searchButt: false })
-    }
-
-    dashDrop = (event) => {
-        event.preventDefault()
-
-        this.setState({ DashButt: true })
-    }
-
-    closeDash = (event) => {
-        event.preventDefault();
-
-        this.setState({ DashButt: false })
-    }
-
-    loginDrop = (event) => {
-        event.preventDefault()
-
-        this.setState({ loginButt: true })
-    }
-
-    closeLogin = (event) => {
-        event.preventDefault();
-
-        this.setState({ loginButt: false })
-    }
-
     render() {
         return (
             <>
                 <NavWrapper>
-                    <h1>Sunday Staples</h1>
-
-                    <table>
-                        <tr>
-                            <th>
-                                <NavLink
-                                    to="/home"
-                                    activeClassName="active"
-                                    isActive={() => window.location.pathname === "/home" || window.location.pathname === "home"}
-                                    className="home-link"
-                                >
-                                    Home
-                                </NavLink>
-                            </th>
-                            <th>
-                                <button
-                                    onMouseEnter={this.searchDrop}
-                                    onMouseLeave={this.closeMenu}
-                                    className="nav-link search"
-                                >
-                                    Search
-                                 </button>
-                            </th>
-                            <th>
-                                <NavLink
-                                    to="/reviews"
-                                    activeClassName="active"
-                                    className="nav-link"
-                                >
-                                    Reviews
-                                 </NavLink>
-                            </th>
-                            <th>
-                                <button
-                                    onMouseEnter={this.dashDrop}
-                                    onMouseLeave={this.closeDash}
-                                    className="nav-link"
-                                >
-                                    Dashboard
-                                 </button>
-                            </th>
-                            <th>
-                                <button
-                                    onMouseEnter={this.loginDrop}
-                                    onMouseLeave={this.closeLogin}
-                                    className="nav-link"
-                                >
-                                    Log in
-                                 </button>
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-
-                            </td>
-                            <td>
-                                {this.state.searchButt ? (
-                                    <div className="searchDropDown"
-                                        onMouseEnter={this.searchDrop}
-                                        onMouseLeave={this.closeMenu}
-                                    >
-                                        <NavLink
-                                            to="/recipe-search"
-                                            activeClassName="active"
-                                            className="searched"
-                                        >
-                                            Recipe Search
-                                        </NavLink>
-                                        <br />
-                                        <NavLink
-                                            to="/nutrition-search"
-                                            activeClassName="active"
-                                            className="searched"
-                                        >
-                                            Nutrition Search
-                                         </NavLink>
-                                    </div>
-
-                                ) : (null)}
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                {this.state.DashButt ? (
-                                    <div className="DashDropDown"
-                                        onMouseEnter={this.dashDrop}
-                                        onMouseLeave={this.closeDash}
-                                    >
-                                        <NavLink
-                                            to="/saved-recipes"
-                                            activeClassName="active"
-                                            className="Dashed"
-                                        >
-                                            Saved Recipes
-                                        </NavLink>
-                                        <br />
-                                        <NavLink
-                                            to="/shopping-list"
-                                            activeClassName="active"
-                                            className="Dashed"
-                                        >
-                                            Shopping List
-                                        </NavLink>
-                                    </div>
-
-                                ) : (null)}
-                            </td>
-                            <td>
-                                {this.state.loginButt ? (
-                                    <div className="loginDropDown"
-                                        onMouseEnter={this.loginDrop}
-                                        onMouseLeave={this.closeLogin}
-                                    >
-                                        <NavLink
-                                            to="/login"
-                                            activeClassName="active"
-                                            className="Log"
-                                        >
-                                            Log in
-                                        </NavLink>
-                                        <br />
-                                        <NavLink
-                                            to="/register"
-                                            activeClassName="active"
-                                            className="Log"
-                                        >
-                                            Register
-                                        </NavLink>
-                                        <br />
-                                        <br />
-                                        <br />
-                                        <Link to="/login"
-                                            onClick={this.onLogoutClick}
-                                            className="Log">
-                                            Logout
-                                        </Link>
-                                    </div>
-
-                                ) : (null)}
-                            </td>
-
-                        </tr>
-                    </table>
-
+                <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                    <h1 class="navbar-brand">Sunday Staples</h1>
+                    
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                    <li class="nav-item active">
+                    <NavLink
+                        to="/home"
+                        activeClassName="active"
+                        isActive={() => window.location.pathname === "/home" || window.location.pathname === "home"}
+                        className="nav-link"
+                        >
+                        Home
+                    </NavLink> 
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Search
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <NavLink
+                            to="/recipe-search"
+                            activeClassName="active"
+                            className="dropdown-item"
+                        >
+                        Recipe Search
+                        </NavLink>
+                        <NavLink
+                            to="/nutrition-search"
+                            activeClassName="active"
+                            className="dropdown-item"
+                        >
+                        Nutrition Search
+                         </NavLink>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink
+                            to="/reviews"
+                            activeClassName="active"
+                            className="nav-link"
+                            >
+                            Reviews
+                        </NavLink>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dashboard
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <NavLink
+                            to="/saved-recipes"
+                            activeClassName="active"
+                            className="dropdown-item"
+                            >
+                            Saved Recipes
+                        </NavLink>
+                        <NavLink
+                            to="/shopping-list"
+                            activeClassName="active"
+                            className="dropdown-item"
+                            >
+                            Shopping List
+                        </NavLink>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Log In
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <NavLink
+                            to="/login"
+                            activeClassName="active"
+                            className="Log dropdown-item"
+                            >
+                            Log in
+                        </NavLink>
+                        <NavLink
+                            to="/register"
+                            activeClassName="active"
+                            className="Log dropdown-item"
+                            >
+                            Register
+                        </NavLink>
+                        <Link to="/login"
+                            onClick={this.onLogoutClick}
+                            className="Log dropdown-item">
+                            Logout
+                        </Link>
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+                </nav>
                 </NavWrapper>
             </>
         )

@@ -9,17 +9,14 @@ import { logoutUser } from "../actions/authActions";
 
 const RecSearch = styled.div`
 font-family: 'Questrial', sans-serif;
-
 h1{
     margin: 0;
     font-family: 'Playfair Display', serif;
 }
 .search-instructions{
     background-color: #EF233C;
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 10px;
     padding: 10px;
+    margin-top: 1%;
 }
 .stapleInput {
     margin-left: 5px;
@@ -27,8 +24,6 @@ h1{
 }
 .searchDiv{
     background-color: #EDF2F4;
-    width: 80vw;
-    margin-left: 10vw;
     padding: 10px;
     text-align: center;
 }
@@ -40,11 +35,7 @@ h1{
 .searchButton{
     border-radius: 5px;
 }
-.searchedRecipes{
-    width: 80vw;
-    margin-left: 10vw;
-    margin-top: 10px;
-}
+
 `
 
 class RecipeSearch extends Component {
@@ -103,13 +94,16 @@ class RecipeSearch extends Component {
         return (
             <>
                 <RecSearch>
+                    <div className="container">
+                    <div className="row">
+                    <section className="col-12">
                     <div className="search-instructions">
                         <h1>
                             Recipe Search
-                   </h1>
+                        </h1>
                         <p>
                             Add some variety to your meal plan for the week by searching a Sunday Staple (protein, veggie, fruit, anything that you have leftover from the past week) and find a new recipe to try out. If you create an account you can also save the recipe title and link by clicking the Save! button, and then you can come back and view saved recipes by clicking on the Dashboard link to Saved Recipes. It's that easy!
-                   </p>
+                        </p>
                     </div>
 
                     <div className="searchDiv">
@@ -128,10 +122,10 @@ class RecipeSearch extends Component {
                             Search
                         </button>
                     </div>
-
+                    </section>
+                    </div>
                     <div className="searchedRecipes">
-                        <h1>Recipes</h1>
-                        <ul>
+                        <ul className="row">
                             {this.state.recipes.slice(0, 6).map(recipe => (
                                 <RecipeCard
                                     key={recipe.recipe.url}
@@ -155,6 +149,7 @@ class RecipeSearch extends Component {
                                 />
                             ))}
                         </ul>
+                    </div>
                     </div>
                 </RecSearch>
             </>

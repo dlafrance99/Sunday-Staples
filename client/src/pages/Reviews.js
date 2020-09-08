@@ -42,6 +42,7 @@ class Reviews extends Component {
         return (
             <>
                 <Reviewstyle>
+                    <div className="container">
                     {this.state.reviews.map(review => (
                         <Reviewcard
                             name={review.alias}
@@ -55,6 +56,7 @@ class Reviews extends Component {
                         />
                     ))}
                     <br />
+                    </div>
                 </Reviewstyle>
             </>
 

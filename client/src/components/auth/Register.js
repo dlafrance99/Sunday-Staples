@@ -11,10 +11,10 @@ text-align: center;
 font-family: 'Questrial', sans-serif;
 .SignUp{
   background-color: transparent;
-    margin-top: 22px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 3px;
+  margin-top: 22px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 3px;
 }
 a {
   text-decoration: none;
@@ -26,42 +26,38 @@ a {
 }
 
 .reasons{
-  width: 50vw;
-  height: 100vw;
+  height: 100%;
   float: left;
   background: #EDF2F4;
-  padding-top: 10%;
+  padding-top: 20%;
 }
 
 .icon3 {
   background-color: #787986;
-  text-decoration: none;
 }
 
 .iconCard {
-  height: 13vw;
-  width: 13vw;
+  height: 14rem;
+  width: 95%;
   border-radius: 50%;
-  display: block;
+  display: inline-block;
   text-align: center;
-  margin-left: 17vw;
-  padding: 2% 1% 0;
+  margin: 6% 2.4% 0;
+  padding: 11% 9% 0;
   color: black;
 }
 
 .icon4 {
   background-color: #F0374D;
-  text-decoration: none;
 }
 
 .icon {
-  width: 5vw;
-  margin-top: 17%;
+  width: 5rem;
+  margin-top: 18%;
 }
 
 .registerForm {
-  width: 50vw;
-  height: 102vw;
+  height: 100%;
   float: right;
   background: #D2E7DE;
   padding-top: 12%;
@@ -74,7 +70,9 @@ input {
   width: 26vw;
   height: 3vw;
 }
-
+.section{
+  height: 100vh;
+}
 `
 
 class Register extends Component {
@@ -126,25 +124,28 @@ class Register extends Component {
 
     return (
       <RegisterStyled>
-
         <div className="container">
-          <div className="row">
-            <div className="reasons">
+          <div className="row section">
+            <div className="reasons col-6">
               <h3>Creating an account gives you the ability to</h3>
-              <div className="Icons">
-              <Link to="/saved-recipes"><p className="iconCard icon3">
-                        <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
-                        <br/>
-                        Save Recipes
-                        </p></Link>
-                        <Link to="/shopping-list"><p className="iconCard icon4">
-                        <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
-                        <br/>
-                        Create Shopping List
-                        </p></Link>
+              <div className="Icons row">
+              <div className="col-6">
+                            <Link><p className="iconCard icon3">
+                                <img className="icon" src="assets/images/fried.png" alt="frying pan icon" />
+                                <br/>
+                                Save Recipes
+                            </p></Link>
+                            </div>
+                            <div className="col-6">
+                            <Link><p className="iconCard icon4">
+                                <img className="icon" src="assets/images/shopping-cart.png" alt="shopping cart icon" />
+                                <br/>
+                                Create Shopping List
+                            </p></Link>
+                            </div>
               </div>
             </div>
-              <div className="registerForm">
+              <div className="registerForm col-6">
                 <p className="main"><b>Register</b> below</p>
                 <p className="grey-text text-darken-1">
                   Already have an account? <Link to="/login">Log in</Link>
